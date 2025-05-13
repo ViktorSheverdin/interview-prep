@@ -1,5 +1,5 @@
 import React from 'react';
-import { JsonViewer } from './interviewPrepTasks/JsonViewer';
+import { JsonViewer } from './interviewPrepTasks/ReactQuestions/JsonViewer';
 
 function App() {
   return (
