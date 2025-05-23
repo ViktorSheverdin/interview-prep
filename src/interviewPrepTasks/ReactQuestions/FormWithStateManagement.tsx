@@ -67,6 +67,13 @@ const UserForm = (props: UserFormProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formDataErrors[name as keyof FormDataErrors]) {
+      setFormDataErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name as keyof FormDataErrors];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
