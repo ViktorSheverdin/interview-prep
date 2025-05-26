@@ -14,21 +14,6 @@ type Book = {
 const BookApp: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await fetch('/api/books');
-        const data = await response.json();
-        setBooks(data);
-      } catch (err) {
-        console.error('Failed to fetch books', err);
-        setBooks([]); // fallback
-      }
-    };
-
-    fetchBooks();
-  }, []);
-
   const addBook = (book: Book) => {
     setBooks((prev) => [...prev, book]);
   };
