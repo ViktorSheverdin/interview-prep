@@ -14,6 +14,10 @@ interface UserI {
   lastName: string;
 }
 
+interface PostsResponse {
+  posts: PostI[];
+}
+
 const BASE_URL_POSTS = 'https://dummyjson.com/posts';
 const BASE_URL_USERS = 'https://dummyjson.com/users';
 
@@ -47,9 +51,9 @@ const PostsComponent: React.FC = () => {
       try {
         setIsPending(true);
         const postsResponse = await fetch(BASE_URL_POSTS);
-
+        if (!postsResponse.ok) setErrors('Errors fetching posts');
         // can have multiple posts from a single user
-        const postsData = await postsResponse.json();
+        const postsData: PostsResponse = await postsResponse.json();
 
         // get unique IDs
         const userIds: string[] = Array.from(
@@ -57,12 +61,16 @@ const PostsComponent: React.FC = () => {
         );
 
         // get promises for all users to save time on requests
-        const usersPromises = userIds.map((userId) => {
-          return fetch(`${BASE_URL_USERS}/${userId}`).then((res) => res.json());
+        const usersPromises: Promise<UserI>[] = userIds.map((userId) => {
+          return fetch(`${BASE_URL_USERS}/${userId}`)
+            .then((res) => {
+              if (!res.ok) setErrors('Error fetching users');
+              return res.json();
+            })
+            .then((data: UserI) => data);
         });
 
-        const usersData = await Promise.all(usersPromises);
-        console.log(usersData);
+        const usersData: UserI[] = await Promise.all(usersPromises);
 
         // create a map since order is important
         const userMap = new Map<string, string>();
