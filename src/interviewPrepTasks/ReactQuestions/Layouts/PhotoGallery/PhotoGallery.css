@@ -1,0 +1,22 @@
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  max-height: 400px;
+  overflow: auto;
+  border: 1px solid #000;
+  margin-bottom: 30px;
+}
+
+.photo-item {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.photo-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
