@@ -1,0 +1,37 @@
+.todo-list {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.task-item.completed span {
+  text-decoration: line-through;
+  color: #888;
+  cursor: pointer;
+}
+
+.task-item button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.task-item span {
+  cursor: pointer;
+}
+
+.task-item button:hover {
+  background-color: #ff1a1a;
+}
