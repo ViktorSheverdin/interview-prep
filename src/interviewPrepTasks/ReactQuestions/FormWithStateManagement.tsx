@@ -55,13 +55,13 @@ const UserForm = (props: UserFormProps) => {
   const requiredFields: (keyof FormData)[] = ['name', 'lastName'];
 
   const validate = () => {
-    const newErrors: FormDataErrors = {};
+    const newErros: FormDataErrors = {};
     requiredFields.forEach((field) => {
-      if (!formData[field]?.trim()) {
-        newErrors[field as keyof FormDataErrors] = 'Required field';
+      if (!formData[field]) {
+        newErros[field as keyof FormDataErrors] = 'Required field';
       }
     });
-    return newErrors;
+    return newErros;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

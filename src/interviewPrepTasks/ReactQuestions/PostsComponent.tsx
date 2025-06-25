@@ -33,7 +33,7 @@ const Post: React.FC<PostI> = (props) => {
   );
 };
 
-const PostsComponent: React.FC = () => {
+export const PostsComponent: React.FC = () => {
   const [posts, setPosts] = useState<PostI[]>([
     {
       id: 'Post1',
@@ -123,5 +123,3 @@ const PostsComponent: React.FC = () => {
     </div>
   );
 };
-
-export default PostsComponent;

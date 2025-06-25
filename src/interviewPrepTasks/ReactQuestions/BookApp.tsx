@@ -11,7 +11,7 @@ type Book = {
 // -------------------------
 // Main Component
 // -------------------------
-const BookApp: React.FC = () => {
+export const BookApp: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const addBook = (book: Book) => {
@@ -196,4 +196,3 @@ const BookList: React.FC<BookListProps> = ({ books, setBooks }) => {
     </div>
   );
 };
-export default BookApp;

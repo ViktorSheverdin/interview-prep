@@ -1,22 +1,7 @@
-import React from 'react';
-import { JsonViewer } from './interviewPrepTasks/ReactQuestions/JsonViewer';
-import BookApp from './interviewPrepTasks/ReactQuestions/BookApp';
-import { FormWithStateManagement } from './interviewPrepTasks/ReactQuestions/FormWithStateManagement';
-import PostsComponent from './interviewPrepTasks/ReactQuestions/PostsComponent';
-import { Layouts } from './interviewPrepTasks/ReactQuestions/Layouts';
-import { AlbumPhotoApplication } from './interviewPrepTasks/ReactQuestions/AlbumPhotoApplication';
+import { Navbar } from './Components/Navbar/Navbar';
 
 function App() {
-  return (
-    <div className='App'>
-      <AlbumPhotoApplication />
-      <Layouts />
-      <JsonViewer />
-      <BookApp />
-      <FormWithStateManagement />
-      <PostsComponent />
-    </div>
-  );
+  return <Navbar />;
 }
 
 export default App;
