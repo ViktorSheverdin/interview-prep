@@ -1,1 +1,2 @@
-# Interview prep directory
+# Interview prep project
+Some time ago, I found myself looking for a new position. It had already been several years since I had had to code on the interview, and I found myself pretty rusty in some aspects and completely unprepared in others. So, I started this project to summarize what I faced during the interviews, my approach and some comments to certain sections. I am planning to keep on working on this project so other engineers could work from this and land jobs as well.
