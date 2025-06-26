@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import './PhotoGallery.css';
+
+import React, { useEffect, useState } from 'react';
 
 interface PhotoI {
   id: number;

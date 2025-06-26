@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // Type
 type Book = {
@@ -53,7 +53,10 @@ const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     // Clear error on valid input
-    if (formErrors.hasOwnProperty(name) && value.trim() !== '') {
+    if (
+      Object.prototype.hasOwnProperty.call(formErrors, name) &&
+      value.trim() !== ''
+    ) {
       setFormErrors((prev) => ({ ...prev, [name]: false }));
     }
   };

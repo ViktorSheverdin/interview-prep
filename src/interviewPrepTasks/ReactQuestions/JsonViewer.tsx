@@ -92,7 +92,7 @@ export function JsonViewer() {
   const [parsedJson, setParsedJson] = useState<unknown>(null);
   const [errors, setErrors] = useState('');
 
-  const convertToJson = (valueToConvert: any) => {
+  const convertToJson = (valueToConvert: string) => {
     try {
       const parsedData = JSON.parse(valueToConvert);
       setParsedJson(parsedData);
