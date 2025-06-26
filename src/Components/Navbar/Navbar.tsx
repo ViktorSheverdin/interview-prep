@@ -1,11 +1,13 @@
+import './Navbar.css';
+
 import React, { useState } from 'react';
+
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/BookApp';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/FormWithStateManagement';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/JsonViewer';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/PostsComponent';
-import './Navbar.css';
 
 const PAGES: Record<string, React.ReactNode> = {
   'Album Photo Application': <AlbumPhotoApplication />,
