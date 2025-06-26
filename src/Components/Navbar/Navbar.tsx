@@ -8,6 +8,7 @@ import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/JsonViewer';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/PostsComponent';
+import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/InputSanitizing/InputSanitizing';
 
 const PAGES: Record<string, React.ReactNode> = {
   'Album Photo Application': <AlbumPhotoApplication />,
@@ -16,6 +17,7 @@ const PAGES: Record<string, React.ReactNode> = {
   'Book App': <BookApp />,
   'FormWith State Management': <FormWithStateManagement />,
   'Posts Component': <PostsComponent />,
+  'Input Sanitizing': <InputSanitizing />,
 };
 
 export const Navbar = () => {
