@@ -1,36 +1,62 @@
-import { useState } from 'react';
+import './InputSanitizing.css';
+
+import React, { useState } from 'react';
+
+import { isValidPassword } from './inputSanitizingUtils';
 
 export const InputSanitizing = () => {
   const [passInputValue, setPassInputValue] = useState('');
+  const [error, setError] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const sanitized = value.replace(/\D/g, '');
+    setPassInputValue(sanitized);
+
+    // Validate the sanitized value (digits only)
+    const validationMsg = isValidPassword(sanitized);
+    setError(validationMsg);
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setError(null);
+    if (error) {
+      return;
+    }
     setPassword(passInputValue);
+    setPassInputValue('');
   };
 
+  const isDisabled = !!error || passInputValue === '';
+
   return (
-    <div>
+    <div className='input-sanitizing-container'>
       <h1>Input Sanitizing</h1>
       <form
-        onSubmit={(e) => {
-          onSubmit(e);
-        }}
+        className='input-sanitizing-form'
+        onSubmit={onSubmit}
       >
-        <label>
-          Enter password:
-          <input
-            value={passInputValue}
-            placeholder='Exactly 7 digits'
-            onChange={(e) => setPassInputValue(e.target.value)}
-          />
-        </label>
-        <button type='submit'>Submit</button>
-        {password ? password : null}
-        {error ? error : null}
+        <label htmlFor='password'>Enter password:</label>
+        <input
+          id='password'
+          type='text'
+          inputMode='numeric'
+          pattern='\d*'
+          value={passInputValue}
+          placeholder='Exactly 7 digits'
+          onChange={handleInput}
+        />
+        <button
+          type='submit'
+          disabled={isDisabled}
+        >
+          Submit
+        </button>
+
+        {password && <div className='success-msg'>Entered: {password}</div>}
+        {error && <div className='error-msg'>{error}</div>}
       </form>
     </div>
   );
