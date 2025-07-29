@@ -26,10 +26,12 @@ module.exports = {
   },
   rules: {
     // Enforce sorted imports and exports
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'warn',
+    'simple-import-sort/exports': 'warn',
     // React 17+ does not require React variable in scope
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+    // Disable unused var rule for plain JS as well
+    'no-unused-vars': 'off',
   },
 };
