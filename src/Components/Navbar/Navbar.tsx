@@ -6,11 +6,13 @@ import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/A
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/BookApp';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/FormWithStateManagement';
 import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/InputSanitizing/InputSanitizing';
+import JobBoard from '../../interviewPrepTasks/ReactQuestions/JobBoard';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/JsonViewer';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/PostsComponent';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Job Board': <JobBoard />,
   'Album Photo Application': <AlbumPhotoApplication />,
   'Layouts': <Layouts />,
   'Json Viewer': <JsonViewer />,
