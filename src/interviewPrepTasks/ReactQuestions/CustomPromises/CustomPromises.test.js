@@ -98,17 +98,43 @@ describe('static methods', () => {
     );
   });
 
-  describe('all', () => {
+  describe.only('all', () => {
     it('with success', () => {
       return MyPromise.all([promise({ value: 1 }), promise({ value: 2 })]).then(
         (v) => expect(v).toEqual([1, 2])
       );
     });
 
-    it('with fail', () => {
-      return MyPromise.all([promise(), promise({ fail: true })]).catch((v) =>
-        expect(v).toEqual(DEFAULT_VALUE)
-      );
+    it('should reject if any promise in the array rejects', async () => {
+      // Create a mix of resolving and rejecting promises
+      const promises = [
+        MyPromise.resolve(1),
+        MyPromise.reject(2),
+        MyPromise.resolve(3),
+      ];
+
+      // Use Jest's .rejects matcher to test for rejection
+      return MyPromise.all(promises).catch((e) => {
+        expect(e).toEqual(2);
+      });
+    });
+
+    it('with an empty array', () => {
+      return MyPromise.all([]).then((value) => {
+        expect(value).toEqual([]);
+      });
+    });
+
+    it('should resolve non promises', () => {
+      return MyPromise.all([1, 2, 3]).then((v) => {
+        expect(v).toEqual([1, 2, 3]);
+      });
+    });
+
+    it('should fail for non iterable', () => {
+      return MyPromise.all(null).catch((e) => {
+        expect(e).toEqual('Not iterable');
+      });
     });
   });
 

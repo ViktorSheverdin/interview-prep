@@ -132,6 +132,36 @@ class MyPromise {
       reject(value);
     });
   }
+
+  static all(promises) {
+    const results = [];
+    let resolvedPromises = 0;
+
+    return new MyPromise((resolve, reject) => {
+      if (!Array.isArray(promises)) {
+        return reject('Not iterable');
+      }
+
+      if (promises.length === 0) {
+        return resolve(results);
+      }
+
+      for (let i = 0; i < promises.length; i++) {
+        const promise = promises[i];
+
+        MyPromise.resolve(promise)
+          .then((value) => {
+            results[i] = value;
+            resolvedPromises++;
+
+            if (resolvedPromises === promises.length) {
+              resolve(results);
+            }
+          })
+          .catch(reject);
+      }
+    });
+  }
 }
 
 class UncaughtPromiseError extends Error {
