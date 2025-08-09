@@ -25,6 +25,7 @@ class MyPromise {
       this.#thenCbs.forEach((callback) => {
         callback(this.#value);
       });
+
       this.#thenCbs = [];
     }
 
@@ -32,6 +33,7 @@ class MyPromise {
       this.#catchCbs.forEach((callback) => {
         callback(this.#value);
       });
+
       this.#catchCbs = [];
     }
   }
@@ -77,6 +79,7 @@ class MyPromise {
           resolve(result);
           return;
         }
+
         try {
           resolve(thenCb(result));
         } catch (error) {
@@ -86,7 +89,7 @@ class MyPromise {
 
       this.#catchCbs.push((result) => {
         if (catchCb == null) {
-          resolve(result);
+          reject(result);
           return;
         }
 
@@ -104,6 +107,7 @@ class MyPromise {
   catch(cb) {
     return this.then(undefined, cb);
   }
+
   finally(cb) {
     return this.then(
       (result) => {
@@ -128,38 +132,13 @@ class MyPromise {
       reject(value);
     });
   }
-
-  static all(promises) {
-    return new MyPromise((resolve, reject) => {
-      if (!Array.isArray(promises)) {
-        return reject(new TypeError('Argument is not iterable'));
-      }
-
-      const resolvedValues = Array(promises.length);
-      let resolvedCount = 0;
-
-      if (promises.length === 0) return resolve(resolvedValues);
-
-      promises.forEach((promise, index) => {
-        MyPromise.resolve(promise)
-          .then((value) => {
-            resolvedValues[index] = value;
-            resolvedCount += 1;
-
-            if (resolvedCount === promise.length) {
-              resolve(resolvedValues);
-            }
-          })
-          .catch(reject);
-      });
-    });
-  }
 }
 
 class UncaughtPromiseError extends Error {
   constructor(error) {
     super(error);
-    this.stack = `(in promise) ${error}`;
+
+    this.stack = `(in promise) ${error.stack}`;
   }
 }
 
