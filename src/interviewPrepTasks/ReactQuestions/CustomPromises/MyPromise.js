@@ -62,10 +62,6 @@ class MyPromise {
         return;
       }
 
-      if (this.#catchCbs.length === 0) {
-        throw new UncaughtPromiseError(value);
-      }
-
       this.#value = value;
       this.#state = STATE.REJECTED;
       this.#runCallbacks();
@@ -133,42 +129,34 @@ class MyPromise {
     });
   }
 
-  static all(promises) {
-    const results = [];
-    let resolvedPromises = 0;
-
+  static all(iterable) {
     return new MyPromise((resolve, reject) => {
-      if (!Array.isArray(promises)) {
+      if (!Array.isArray(iterable)) {
         return reject('Not iterable');
       }
 
-      if (promises.length === 0) {
-        return resolve(results);
+      if (iterable.length === 0) {
+        return resolve([]);
       }
 
-      for (let i = 0; i < promises.length; i++) {
-        const promise = promises[i];
+      const results = [];
+      let resolvedPromises = 0;
 
-        MyPromise.resolve(promise)
-          .then((value) => {
-            results[i] = value;
+      for (let i = 0; i < iterable.length; i++) {
+        const item = iterable[i];
+
+        Promise.resolve(item)
+          .then((result) => {
+            results.push(result);
             resolvedPromises++;
 
-            if (resolvedPromises === promises.length) {
-              resolve(results);
+            if (iterable.length === resolvedPromises) {
+              return resolve(results);
             }
           })
           .catch(reject);
       }
     });
-  }
-}
-
-class UncaughtPromiseError extends Error {
-  constructor(error) {
-    super(error);
-
-    this.stack = `(in promise) ${error.stack}`;
   }
 }
 

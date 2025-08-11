@@ -1,5 +1,6 @@
 /* eslint-env jest */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const MyPromise = require('./MyPromise.js');
 // const MyPromise = Promise;
 
@@ -105,20 +106,6 @@ describe('static methods', () => {
       );
     });
 
-    it('should reject if any promise in the array rejects', async () => {
-      // Create a mix of resolving and rejecting promises
-      const promises = [
-        MyPromise.resolve(1),
-        MyPromise.reject(2),
-        MyPromise.resolve(3),
-      ];
-
-      // Use Jest's .rejects matcher to test for rejection
-      return MyPromise.all(promises).catch((e) => {
-        expect(e).toEqual(2);
-      });
-    });
-
     it('with an empty array', () => {
       return MyPromise.all([]).then((value) => {
         expect(value).toEqual([]);
@@ -132,8 +119,20 @@ describe('static methods', () => {
     });
 
     it('should fail for non iterable', () => {
+      expect.assertions(1);
       return MyPromise.all(null).catch((e) => {
         expect(e).toEqual('Not iterable');
+      });
+    });
+
+    it('should reject if any promise in the array rejects', () => {
+      expect.assertions(1);
+      const rejectionReason = 'I am an error';
+      return MyPromise.all([
+        promise({ value: 1 }),
+        promise({ value: rejectionReason, fail: true }),
+      ]).catch((reason) => {
+        expect(reason).toBe(rejectionReason);
       });
     });
   });
