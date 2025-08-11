@@ -5,9 +5,7 @@
  * @return {U}
  */
 Array.prototype.myReduce = function (callbackFn, initialValue) {
-  if (typeof callbackFn !== 'function') {
-    throw new TypeError('Not a function');
-  }
+  if (typeof callbackFn !== 'function') throw TypeError('Not a function');
 
   let accumulator = initialValue;
   let index = 0;
