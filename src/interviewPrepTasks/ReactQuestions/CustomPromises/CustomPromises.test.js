@@ -99,7 +99,7 @@ describe('static methods', () => {
     );
   });
 
-  describe.only('all', () => {
+  describe('all', () => {
     it('with success', () => {
       return MyPromise.all([promise({ value: 1 }), promise({ value: 2 })]).then(
         (v) => expect(v).toEqual([1, 2])

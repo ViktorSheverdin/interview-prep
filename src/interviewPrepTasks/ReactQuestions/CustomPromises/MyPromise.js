@@ -158,6 +158,68 @@ class MyPromise {
       }
     });
   }
+
+  static allSettled(promises) {
+    return new MyPromise((resolve, reject) => {
+      if (!Array.isArray(promises)) return reject('Not iterable');
+
+      if (promises.length === 0) return resolve([]);
+
+      const results = [];
+      let resolvedCount = 0;
+
+      for (let i = 0; i < promises.length; i++) {
+        const promise = promises[i];
+
+        promise
+          .then((value) => {
+            results[i] = { status: STATE.FULFILLED, value };
+          })
+          .catch((reason) => {
+            results[i] = { status: STATE.REJECTED, reason };
+          })
+          .finally(() => {
+            resolvedCount++;
+            if (resolvedCount === promises.length) {
+              resolve(results);
+            }
+          });
+      }
+    });
+  }
+
+  static race(promises) {
+    return new MyPromise((resolve, reject) => {
+      if (!Array.isArray(promises)) return reject('Not iterable');
+
+      for (let i = 0; i < promises.length; i++) {
+        const promise = promises[i];
+        promise.then(resolve).catch(reject);
+      }
+    });
+  }
+
+  static any(promises) {
+    return new MyPromise((resolve, reject) => {
+      if (!Array.isArray(promises)) return reject('Not iterable');
+
+      const failedPromises = [];
+      let failedCount = 0;
+
+      for (let i = 0; i < promises.length; i++) {
+        const promise = promises[i];
+
+        promise.then(resolve).catch((value) => {
+          failedPromises.push(value);
+          failedCount++;
+
+          if (failedCount === promise.length) {
+            reject(failedPromises);
+          }
+        });
+      }
+    });
+  }
 }
 
 module.exports = MyPromise;
