@@ -10,6 +10,11 @@ import JobBoard from '../../interviewPrepTasks/ReactQuestions/JobBoard';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/JsonViewer';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/PostsComponent';
+<<<<<<< Updated upstream
+=======
+import './Navbar.css';
+import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/InputSanitizing';
+>>>>>>> Stashed changes
 
 const PAGES: Record<string, React.ReactNode> = {
   'Job Board': <JobBoard />,
