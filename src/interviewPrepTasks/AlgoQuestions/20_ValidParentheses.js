@@ -3,27 +3,31 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-  const charStack = [];
-
-  const parenthesesMap = new Map([
-    ['{', '}'],
+  const parMap = new Map([
     ['[', ']'],
+    ['{', '}'],
     ['(', ')'],
   ]);
 
+  const stack = [];
+
   for (let i = 0; i < s.length; i++) {
-    if (parenthesesMap.has(s[i])) {
-      charStack.push(s[i]);
+    if (parMap.has(s[i])) {
+      stack.push(s[i]);
     } else {
-      if (charStack.length === 0) return false;
-      const topOfStack = charStack.pop();
-      if (parenthesesMap.get(topOfStack) !== s[i]) {
-        return true;
+      if (stack.length === 0) {
+        return false;
+      }
+
+      const topElement = stack.pop();
+
+      if (parMap.get(topElement) !== s[i]) {
+        return false;
       }
     }
   }
 
-  return charStack.length === 0;
+  return stack.length === 0;
 };
 
 console.log(isValid('()')); //true
@@ -31,3 +35,4 @@ console.log(isValid('()[]{}')); //true
 console.log(isValid('([])')); //true
 console.log(isValid('([]))')); //false
 console.log(isValid('([')); //false
+console.log(isValid('([}')); //false
