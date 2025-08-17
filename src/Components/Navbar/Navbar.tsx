@@ -1,7 +1,9 @@
 import './Navbar.css';
+import './Navbar.css';
 
 import React, { useState } from 'react';
 
+import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns/Observable/ComponentWithObserver';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/BookApp';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/FormWithStateManagement';
@@ -10,14 +12,10 @@ import JobBoard from '../../interviewPrepTasks/ReactQuestions/JobBoard';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/JsonViewer';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/PostsComponent';
-<<<<<<< Updated upstream
-=======
-import './Navbar.css';
-import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/InputSanitizing';
->>>>>>> Stashed changes
 
 const PAGES: Record<string, React.ReactNode> = {
   'Job Board': <JobBoard />,
+  'Component with Observer': <ComponentWithObserver />,
   'Album Photo Application': <AlbumPhotoApplication />,
   'Layouts': <Layouts />,
   'Json Viewer': <JsonViewer />,
