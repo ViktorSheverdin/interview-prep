@@ -4,16 +4,18 @@ import './Navbar.css';
 import React, { useState } from 'react';
 
 import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns/Observable/ComponentWithObserver';
-import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/AlbumPhotoApplication';
-import { BookApp } from '../../interviewPrepTasks/ReactQuestions/BookApp';
-import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/FormWithStateManagement';
 import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/InputSanitizing/InputSanitizing';
-import JobBoard from '../../interviewPrepTasks/ReactQuestions/JobBoard';
-import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/JsonViewer';
-import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts';
-import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/PostsComponent';
+import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
+import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
+import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
+import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
+import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard';
+import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
+import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
+import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Job Board 2': <JobBoard2 />,
   'Job Board': <JobBoard />,
   'Component with Observer': <ComponentWithObserver />,
   'Album Photo Application': <AlbumPhotoApplication />,
@@ -26,9 +28,7 @@ const PAGES: Record<string, React.ReactNode> = {
 };
 
 export const Navbar = () => {
-  const [currentPage, setCurrentPage] = useState<string>(
-    'Album Photo Application'
-  );
+  const [currentPage, setCurrentPage] = useState<string>(Object.keys(PAGES)[0]);
 
   return (
     <div className='app-container'>

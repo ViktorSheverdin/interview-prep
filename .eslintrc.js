@@ -33,5 +33,7 @@ module.exports = {
     'react/prop-types': 'off',
     // Disable unused var rule for plain JS as well
     'no-unused-vars': 'off',
+    // Set TypeScript unused vars to warning instead of error
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 };
