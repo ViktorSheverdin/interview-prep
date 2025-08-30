@@ -5,24 +5,21 @@
  */
 var isAnagram = function (s, t) {
   if (s.length !== t.length) return false;
-  const mapT = new Map();
-
-  for (let i = 0; i < t.length; i++) {
-    mapT.has(t[i]) ? mapT.set(t[i], mapT.get(t[i]) + 1) : mapT.set(t[i], 1);
+  let mapS = {};
+  for (const char of s) {
+    mapS[char] = (mapS[char] || 0) + 1;
   }
-
-  for (let i = 0; i < s.length; i++) {
-    if (mapT.has(s[i])) {
-      mapT.set(s[i], mapT.get(s[i]) - 1);
-      if (mapT.get(s[i]) === 0) {
-        mapT.delete(s[i]);
+  for (const char of t) {
+    if (mapS[char]) {
+      mapS[char] = mapS[char] - 1;
+      if (mapS[char] === 0) {
+        delete mapS[char];
       }
     } else {
       return false;
     }
   }
-
-  return mapT.size === 0;
+  return Object.keys(mapS).length === 0;
 };
 
 console.log(isAnagram('anagram', 'nagaram')); // true
