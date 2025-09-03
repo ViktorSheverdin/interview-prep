@@ -9,6 +9,7 @@ import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
+import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
 import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard';
 import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
@@ -16,6 +17,7 @@ import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePa
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Hacker Rand Interview Test': <HRInterviewTest />,
   'Hacker Rank: Word Omitter': <WordOmitter />,
   'Job Board 2': <JobBoard2 />,
   'Job Board': <JobBoard />,
