@@ -13,8 +13,10 @@ import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/Job
 import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
+import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Hacker Rank: Word Omitter': <WordOmitter />,
   'Job Board 2': <JobBoard2 />,
   'Job Board': <JobBoard />,
   'Component with Observer': <ComponentWithObserver />,
