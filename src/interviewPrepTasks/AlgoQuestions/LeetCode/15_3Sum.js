@@ -12,33 +12,36 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  const map = {};
+  const sNums = nums.sort((a, b) => a - b);
   const result = [];
-  for (let i = 0; i < nums.length; i++) {
-    map[nums[i]] = i;
-  }
+  for (let i = 0; i < sNums.length; i++) {
+    if (i > 0 && sNums[i] === sNums[i - 1]) continue;
 
-  for (let i = 0; i < nums.length; i++) {
-    const currentNumber = nums[i];
-    let secondNumber;
-    if (
-      (map[Number(0 - nums[i])] || map[Number(0 - nums[i])] === 0) &&
-      map[Number(0 - nums[i])] !== i
-    ) {
-      secondNumber = nums[map[Number(0 - nums[i])]];
-    }
-    const numberNeededForZero = Number(0 - currentNumber - secondNumber);
-
-    if (
-      (map[numberNeededForZero] || map[numberNeededForZero] === 0) &&
-      map[numberNeededForZero] !== i
-    ) {
-      result.push([currentNumber, secondNumber, numberNeededForZero]);
+    let left = i + 1;
+    let right = sNums.length - 1;
+    while (left < right) {
+      const currentSum = sNums[i] + sNums[left] + sNums[right];
+      if (currentSum < 0) {
+        left++;
+      } else if (currentSum > 0) {
+        right--;
+      } else {
+        result.push([sNums[i], sNums[left], sNums[right]]);
+        left++;
+        right--;
+        while (left < right && sNums[left] === sNums[left - 1]) {
+          left++;
+        }
+        while (left < right && sNums[right] === sNums[right + 1]) {
+          right--;
+        }
+      }
     }
   }
   return result;
 };
 
 console.log(threeSum([-1, 0, 1, 2, -1, -4])); // [[-1,-1,2],[-1,0,1]]
-// console.log(threeSum([0, 0, 0])); // [[0, 0, 0]]
-// console.log(threeSum([0, 1, 1])); // []
+console.log(threeSum([0, 0, 0])); // [[0, 0, 0]]
+console.log(threeSum([0, 0, 0, 0])); // [[0, 0, 0]]
+console.log(threeSum([0, 1, 1])); // []
