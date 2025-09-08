@@ -17,24 +17,24 @@ var threeSum = function (nums) {
   for (let i = 0; i < sNums.length; i++) {
     if (i > 0 && sNums[i] === sNums[i - 1]) continue;
 
+    const target = 0 - sNums[i];
     let left = i + 1;
     let right = sNums.length - 1;
     while (left < right) {
-      const currentSum = sNums[i] + sNums[left] + sNums[right];
-      if (currentSum < 0) {
+      if (sNums[left] + sNums[right] < target) {
         left++;
-      } else if (currentSum > 0) {
+      } else if (sNums[left] + sNums[right] > target) {
         right--;
       } else {
         result.push([sNums[i], sNums[left], sNums[right]]);
-        left++;
-        right--;
-        while (left < right && sNums[left] === sNums[left - 1]) {
+        while (left < right && sNums[left] === sNums[left + 1]) {
           left++;
         }
-        while (left < right && sNums[right] === sNums[right + 1]) {
+        while (left < right && sNums[right] === sNums[right - 1]) {
           right--;
         }
+        left++;
+        right--;
       }
     }
   }
