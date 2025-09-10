@@ -12,11 +12,13 @@ import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
 import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard';
 import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
+import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard3/JobBoard3';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Job Board 3': <JobBoard3 />,
   'Hacker Rand Interview Test': <HRInterviewTest />,
   'Hacker Rank: Word Omitter': <WordOmitter />,
   'Job Board 2': <JobBoard2 />,
