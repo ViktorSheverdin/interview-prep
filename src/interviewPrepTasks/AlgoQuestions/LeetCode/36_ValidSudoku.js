@@ -14,50 +14,40 @@
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-  let isValid = true;
+  if (board.length !== 9) return false;
+  if (board[0].length !== 9) return false;
+
+  const rowSet = Array.from({ length: board.length }, () => new Set());
+  const columnSet = Array.from({ length: board[0].length }, () => new Set());
+  const boxSet = Array.from({ length: board.length }, () => new Set());
 
   for (let i = 0; i < board.length; i++) {
-    const rowSet = new Set();
-    const columnSet = new Set();
-
     for (let j = 0; j < board[i].length; j++) {
-      if (rowSet.has(board[i][j])) {
+      // 2D Grid coordinate to 1D coordinate
+      const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+      const currentValue = board[i][j];
+
+      if (currentValue === '.') continue;
+
+      if (boxSet[boxIndex].has(currentValue)) {
         return false;
-      }
-      if (board[i][j] !== '.') {
-        rowSet.add(board[i][j]);
       }
 
-      if (columnSet.has(board[j][i])) {
+      if (rowSet[i].has(currentValue)) {
         return false;
       }
-      if (board[j][i] !== '.') {
-        columnSet.add(board[j][i]);
+
+      if (columnSet[j].has(currentValue)) {
+        return false;
       }
+
+      rowSet[i].add(currentValue);
+      columnSet[j].add(currentValue);
+      boxSet[boxIndex].add(currentValue);
     }
   }
 
-  for (let outerRow = 0; outerRow < 9; outerRow += 3) {
-    for (let outerColumn = 0; outerColumn < 9; outerColumn += 3) {
-      const boxSet = new Set();
-      for (let innerRow = outerRow; innerRow < outerRow + 3; innerRow++) {
-        for (
-          let innerColumn = outerColumn;
-          innerColumn < outerColumn + 3;
-          innerColumn++
-        ) {
-          if (boxSet.has(board[innerRow][innerColumn])) {
-            return false;
-          }
-          if (board[innerRow][innerColumn] !== '.') {
-            boxSet.add(board[innerRow][innerColumn]);
-          }
-        }
-      }
-    }
-  }
-
-  return isValid;
+  return true;
 };
 
 const board1 = [
