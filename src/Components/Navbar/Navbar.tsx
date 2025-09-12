@@ -16,9 +16,11 @@ import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApp
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
 import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/SearchBar/SearchBar';
+import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Static Login': <StaticLogin />,
   'Search Bar': <SearchBar />,
   'Job Board 3': <JobBoard3 />,
   'Hacker Rand Interview Test': <HRInterviewTest />,
