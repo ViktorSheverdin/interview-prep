@@ -15,9 +15,11 @@ import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/Jo
 import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard3/JobBoard3';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
+import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/SearchBar/SearchBar';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Search Bar': <SearchBar />,
   'Job Board 3': <JobBoard3 />,
   'Hacker Rand Interview Test': <HRInterviewTest />,
   'Hacker Rank: Word Omitter': <WordOmitter />,
