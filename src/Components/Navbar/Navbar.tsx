@@ -4,12 +4,12 @@ import './Navbar.css';
 import React, { useState } from 'react';
 
 import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns/Observable/ComponentWithObserver';
-import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/InputSanitizing/InputSanitizing';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
+import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/InputSanitizing/InputSanitizing';
 import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard';
 import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
 import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard3/JobBoard3';
