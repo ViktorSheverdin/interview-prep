@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   login: string;
@@ -36,6 +37,7 @@ const loginUser = (login: string, password: string): Promise<LoginResponse> => {
 };
 
 export const StaticLogin = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     login: '',
     password: '',
@@ -68,6 +70,7 @@ export const StaticLogin = () => {
       await loginUser(formData.login, formData.password);
       setFormErrors({});
       console.log(`successfuly logged in user ${formData.login}`);
+      navigate('/');
     } catch (err) {
       const error = err as LoginResponse;
       const newErrors: FormErrors = {};
@@ -92,16 +95,29 @@ export const StaticLogin = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '60vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <form
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+        }}
+        onSubmit={handleSubmit}
+      >
         <label htmlFor='login'>Static Login</label>
         <input
           name='login'
           value={formData.login}
           onChange={handleFormUpdate}
         />
-      </div>
-      <div>
         {formErrors.login && <p style={{ color: 'red' }}>{formErrors.login}</p>}
         <label htmlFor='password'>Password</label>
         <input
@@ -113,8 +129,9 @@ export const StaticLogin = () => {
         {formErrors.password && (
           <p style={{ color: 'red' }}>{formErrors.password}</p>
         )}
-      </div>
-      <button type='submit'>Submit</button>
-    </form>
+
+        <button type='submit'>Submit</button>
+      </form>
+    </div>
   );
 };
