@@ -53,6 +53,13 @@ export const StaticLogin = () => {
   const handleFormUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formErrors[name as keyof FormErrors]) {
+      setFormErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name as keyof FormErrors];
+        return newErrors;
+      });
+    }
   };
 
   const validate = () => {
