@@ -7,6 +7,7 @@ import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
+import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExcelTable/ExcelTable';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
 import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/InputSanitizing/InputSanitizing';
@@ -20,6 +21,7 @@ import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageA
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Excel Table': <ExcelTable />,
   'Static Login': <StaticLogin />,
   'Search Bar': <SearchBar />,
   'Job Board 3': <JobBoard3 />,
