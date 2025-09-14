@@ -16,22 +16,27 @@ interface LoginResponse {
   message: string;
 }
 
+interface LoginUser {
+  login: string;
+  password: string;
+}
+
 const testUsers = [
   { login: 'user1', password: '123' },
   { login: 'user2', password: '1234' },
   { login: 'user3', password: '12345' },
 ];
 
-const loginUser = (login: string, password: string): Promise<LoginResponse> => {
+const loginUser = async (props: LoginUser): Promise<LoginResponse> => {
+  const { login, password } = props;
   return new Promise((resolve, reject) => {
     const user = testUsers.find((user) => user.login === login);
-
     if (!user) {
       reject({ status: '404', message: 'No user found' });
     } else if (user.password !== password) {
-      reject({ status: '401', message: 'Invalid password' });
+      reject({ status: '401', message: 'Wrong password' });
     } else {
-      resolve({ status: '200', message: 'Login successful' });
+      resolve({ status: '200', message: 'Success' });
     }
   });
 };
@@ -51,7 +56,7 @@ export const StaticLogin = () => {
   const requiredFileds: (keyof FormData)[] = ['login', 'password'];
 
   const handleFormUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (formErrors[name as keyof FormErrors]) {
       setFormErrors((prev) => {
@@ -66,7 +71,7 @@ export const StaticLogin = () => {
     const newErrors: FormErrors = {};
     requiredFileds.forEach((field) => {
       if (!formData[field]) {
-        newErrors[field as keyof FormErrors] = 'Required field';
+        newErrors[field] = 'Required Field';
       }
     });
     return newErrors;
@@ -74,20 +79,16 @@ export const StaticLogin = () => {
 
   const handleLogin = async () => {
     try {
-      await loginUser(formData.login, formData.password);
-      setFormErrors({});
-      console.log(`successfuly logged in user ${formData.login}`);
+      await loginUser({ login: formData.login, password: formData.password });
       navigate('/');
-    } catch (err) {
+    } catch (err: unknown) {
       const error = err as LoginResponse;
-      const newErrors: FormErrors = {};
       if (error.status === '404') {
-        newErrors.login = error.message;
+        setFormErrors((prev) => ({ ...prev, login: error.message }));
       }
       if (error.status === '401') {
-        newErrors.password = error.message;
+        setFormErrors((prev) => ({ ...prev, password: error.message }));
       }
-      setFormErrors(newErrors);
     }
   };
 
@@ -98,6 +99,7 @@ export const StaticLogin = () => {
       setFormErrors(errors);
     } else {
       await handleLogin();
+      setFormErrors({});
     }
   };
 
