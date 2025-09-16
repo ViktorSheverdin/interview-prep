@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 
+// Interfaces, constants, and styles remain the same
 interface TableData {
   id: number;
   name: string;
   age: string;
   height: string;
 }
+
+type TableColumn = keyof Omit<TableData, 'id'>;
 
 const initialTableData: TableData[] = [
   { id: 1, name: 'Viktor', age: '26', height: '180' },
@@ -15,6 +18,8 @@ const initialTableData: TableData[] = [
 
 const LOCAL_STORAGE_KEY = 'excelTableData';
 
+const columns: TableColumn[] = ['name', 'age', 'height'];
+
 const tableStyle: React.CSSProperties = {
   borderCollapse: 'collapse',
   width: '100%',
@@ -23,16 +28,22 @@ const tableStyle: React.CSSProperties = {
 
 const cellStyle: React.CSSProperties = {
   border: '1px solid black',
-  padding: '8px',
+  padding: 0,
   textAlign: 'left',
+};
+
+const cellWrapperStyle: React.CSSProperties = {
+  padding: '8px',
+  minHeight: '22px',
 };
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  boxSizing: 'border-box',
-  padding: '6px',
+  padding: 0,
   border: 'none',
-  outline: '2px solid blue', // Highlight the active input
+  outline: '2px solid blue',
+  font: 'inherit',
+  background: 'transparent',
 };
 
 const deleteButtonStyle: React.CSSProperties = {
@@ -44,6 +55,7 @@ const deleteButtonStyle: React.CSSProperties = {
   fontSize: '1rem',
 };
 
+// EditableCell component remains the same
 interface EditableCellProps {
   initialValue: string;
   isEditing: boolean;
@@ -58,10 +70,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
   onUpdate,
 }) => {
   const [value, setValue] = useState(initialValue);
-
-  useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
 
   const handleBlur = () => {
     onUpdate(value);
@@ -78,60 +86,56 @@ const EditableCell: React.FC<EditableCellProps> = ({
       style={cellStyle}
       onClick={onStartEdit}
     >
-      {isEditing ? (
-        <input
-          type='text'
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          style={inputStyle}
-          autoFocus
-        />
-      ) : (
-        initialValue
-      )}
+      <div style={cellWrapperStyle}>
+        {isEditing ? (
+          <input
+            type='text'
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
+            style={inputStyle}
+            autoFocus
+          />
+        ) : (
+          initialValue
+        )}
+      </div>
     </td>
   );
 };
 
 export const ExcelTable = () => {
+  // All state and handler functions remain the same
   const [tableData, setTableData] = useState<TableData[]>(() => {
     const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     return savedData ? JSON.parse(savedData) : initialTableData;
   });
 
-  // State to track the currently editing cell's coordinates
   const [editingCell, setEditingCell] = useState<{
     rowId: number;
-    cellName: keyof Omit<TableData, 'id'>;
+    cellName: TableColumn;
   } | null>(null);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tableData));
   }, [tableData]);
 
-  const handleStartEdit = (
-    rowId: number,
-    cellName: keyof Omit<TableData, 'id'>
-  ) => {
+  const handleStartEdit = (rowId: number, cellName: TableColumn) => {
     setEditingCell({ rowId, cellName });
   };
 
   const handleCellUpdate = (
     rowId: number,
-    cellName: keyof Omit<TableData, 'id'>,
+    cellName: TableColumn,
     newValue: string
   ) => {
     setTableData(
-      tableData.map((row) => {
-        if (row.id === rowId) {
-          return { ...row, [cellName]: newValue };
-        }
-        return row;
-      })
+      tableData.map((row) =>
+        row.id === rowId ? { ...row, [cellName]: newValue } : row
+      )
     );
-    setEditingCell(null); // Finish editing
+    setEditingCell(null);
   };
 
   const handleDelete = (id: number) => {
@@ -141,12 +145,7 @@ export const ExcelTable = () => {
   const handleAddRow = () => {
     const newId =
       tableData.length > 0 ? Math.max(...tableData.map((r) => r.id)) + 1 : 1;
-    const newRow: TableData = {
-      id: newId,
-      name: '',
-      age: '',
-      height: '',
-    };
+    const newRow: TableData = { id: newId, name: '', age: '', height: '' };
     setTableData([...tableData, newRow]);
   };
 
@@ -156,57 +155,47 @@ export const ExcelTable = () => {
       <table style={tableStyle}>
         <thead>
           <tr>
-            <th style={{ ...cellStyle, width: '50px' }}></th>{' '}
-            {/* Delete column */}
-            <th style={cellStyle}>Name</th>
-            <th style={cellStyle}>Age</th>
-            <th style={cellStyle}>Height</th>
+            <th style={{ ...cellStyle, width: '50px' }}>
+              {/* <div style={cellWrapperStyle}>&nbsp;</div> */}
+            </th>
+            {columns.map((column) => (
+              <th
+                key={column}
+                style={{ ...cellStyle, textTransform: 'capitalize' }}
+              >
+                <div style={cellWrapperStyle}>{column}</div>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {tableData.map((row) => (
             <tr key={row.id}>
               <td style={cellStyle}>
-                <button
-                  style={deleteButtonStyle}
-                  onClick={() => handleDelete(row.id)}
-                >
-                  X
-                </button>
+                <div style={cellWrapperStyle}>
+                  <button
+                    style={deleteButtonStyle}
+                    onClick={() => handleDelete(row.id)}
+                  >
+                    X
+                  </button>
+                </div>
               </td>
-              <EditableCell
-                initialValue={row.name}
-                isEditing={
-                  editingCell?.rowId === row.id &&
-                  editingCell?.cellName === 'name'
-                }
-                onStartEdit={() => handleStartEdit(row.id, 'name')}
-                onUpdate={(newValue) =>
-                  handleCellUpdate(row.id, 'name', newValue)
-                }
-              />
-              <EditableCell
-                initialValue={row.age}
-                isEditing={
-                  editingCell?.rowId === row.id &&
-                  editingCell?.cellName === 'age'
-                }
-                onStartEdit={() => handleStartEdit(row.id, 'age')}
-                onUpdate={(newValue) =>
-                  handleCellUpdate(row.id, 'age', newValue)
-                }
-              />
-              <EditableCell
-                initialValue={row.height}
-                isEditing={
-                  editingCell?.rowId === row.id &&
-                  editingCell?.cellName === 'height'
-                }
-                onStartEdit={() => handleStartEdit(row.id, 'height')}
-                onUpdate={(newValue) =>
-                  handleCellUpdate(row.id, 'height', newValue)
-                }
-              />
+              {/* Dynamically render cells by looping through the columns array */}
+              {columns.map((column) => (
+                <EditableCell
+                  key={column}
+                  initialValue={row[column]}
+                  isEditing={
+                    editingCell?.rowId === row.id &&
+                    editingCell?.cellName === column
+                  }
+                  onStartEdit={() => handleStartEdit(row.id, column)}
+                  onUpdate={(newValue) =>
+                    handleCellUpdate(row.id, column, newValue)
+                  }
+                />
+              ))}
             </tr>
           ))}
         </tbody>
