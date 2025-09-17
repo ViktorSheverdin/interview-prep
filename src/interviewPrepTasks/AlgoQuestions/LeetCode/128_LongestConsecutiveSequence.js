@@ -9,20 +9,19 @@
  */
 var longestConsecutive = function (nums) {
   if (nums.length === 0) return 0;
-
-  let maxL = 0;
   const setN = new Set(nums);
-  for (const num of setN) {
-    if (!setN.has(num - 1)) {
-      let currentLength = 1;
 
-      while (setN.has(num + currentLength)) {
-        currentLength++;
-      }
-      maxL = Math.max(maxL, currentLength);
+  let result = 0;
+  for (const num of setN) {
+    if (setN.has(num - 1)) continue;
+    let sequenceL = 1;
+    while (setN.has(num + sequenceL)) {
+      sequenceL++;
     }
+    result = Math.max(sequenceL, result);
   }
-  return maxL;
+
+  return result;
 };
 
 console.log(longestConsecutive([100, 4, 200, 1, 3, 2])); // 4
