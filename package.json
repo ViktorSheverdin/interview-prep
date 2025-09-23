@@ -2,11 +2,12 @@
     "name": "interview-prep-monorepo",
     "private": true,
     "workspaces": [
-        "frontend"
+        "frontend",
+        "backend"
     ],
     "scripts": {
-        "dev": "concurrently -n FE -c cyan \"yarn workspace frontend start\"",
-        "build": "yarn workspace frontend build"
+        "dev": "concurrently -n BE,FE -c green,cyan \"yarn workspace backend dev\" \"yarn workspace frontend start\"",
+        "build": "yarn workspace backend build && yarn workspace frontend build"
     },
     "devDependencies": {
         "concurrently": "^8.0.1"
