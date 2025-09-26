@@ -17,7 +17,11 @@ var plusOne = function (digits) {
     }
     digits[i] = 0;
   }
-  digits.unshift(1);
+  // All digits were 9, so we need an extra digit at the front.
+  // Instead of using unshift (which is O(n)), we push a dummy 0 to extend the array
+  // and then set the first element to 1. This keeps the operation O(1).
+  digits.push(0);
+  digits[0] = 1;
   return digits;
 };
 
