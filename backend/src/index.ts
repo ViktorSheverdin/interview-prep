@@ -38,12 +38,6 @@ const AuthorType: GraphQLObjectType = new GraphQLObjectType({
         return books.filter((book) => book.authorId === author.id);
       },
     },
-    // books: {
-    //   type: new GraphQLList(BookType),
-    //   resolve: (author) => {
-    //     return books.find((book) => book.authorId === author.id);
-    //   },
-    // },
   }),
 });
 
@@ -67,10 +61,30 @@ const RootQueryType = new GraphQLObjectType({
   name: 'Query',
   description: 'Root Query',
   fields: () => ({
+    book: {
+      type: BookType,
+      description: 'Single book',
+      args: {
+        id: {
+          type: GraphQLInt,
+        },
+      },
+      resolve: (_p, args) => books.find((book) => book.id === args.id),
+    },
     books: {
       type: new GraphQLList(BookType),
       description: 'List of books',
       resolve: () => books,
+    },
+    author: {
+      type: AuthorType,
+      description: 'Single of authors',
+      args: {
+        id: {
+          type: GraphQLInt,
+        },
+      },
+      resolve: (_p, args) => authors.find((author) => author.id === args.id),
     },
     authors: {
       type: new GraphQLList(AuthorType),
@@ -80,9 +94,52 @@ const RootQueryType = new GraphQLObjectType({
   }),
 });
 
+const RootMutationType = new GraphQLObjectType({
+  name: 'Mutation',
+  description: 'Root Mutation',
+  fields: () => ({
+    addBook: {
+      type: BookType,
+      description: 'Add a book',
+      args: {
+        name: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        authorId: {
+          type: new GraphQLNonNull(GraphQLInt),
+        },
+      },
+      resolve: (_p, args) => {
+        const book = {
+          id: books.length + 1,
+          name: args.name,
+          authorId: args.authorId,
+        };
+        books.push(book);
+        return book;
+      },
+    },
+    addAuthor: {
+      type: AuthorType,
+      description: 'Adds new author',
+      args: {
+        name: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+      },
+      resolve: (_p, args) => {
+        const author = { id: authors.length + 1, name: args.name };
+        authors.push(author);
+        return author;
+      },
+    },
+  }),
+});
+
 // Construct a schema
 const schema = new GraphQLSchema({
   query: RootQueryType,
+  mutation: RootMutationType,
 });
 
 const app = express();
@@ -109,4 +166,14 @@ console.log('Running a GraphQL API server at http://localhost:4000/graphql');
 // curl -X POST \
 //   -H "Content-Type: application/json" \
 //   --data '{"query":"{ authors {name books {name}} }"}' \
+//   http://localhost:4000/graphql
+
+// curl -X POST \
+//   -H "Content-Type: application/json" \
+//   --data '{"query":"{ book(id: 1) {name author {name}} }"}' \
+//   http://localhost:4000/graphql
+
+// curl -X POST \
+//   -H "Content-Type: application/json" \
+//   --data '{"mutation":}' \
 //   http://localhost:4000/graphql
