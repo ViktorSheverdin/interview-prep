@@ -170,10 +170,5 @@ console.log('Running a GraphQL API server at http://localhost:4000/graphql');
 
 // curl -X POST \
 //   -H "Content-Type: application/json" \
-//   --data '{"query":"{ book(id: 1) {name author {name}} }"}' \
-//   http://localhost:4000/graphql
-
-// curl -X POST \
-//   -H "Content-Type: application/json" \
 //   --data '{"mutation":}' \
 //   http://localhost:4000/graphql
