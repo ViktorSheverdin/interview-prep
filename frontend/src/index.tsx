@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -8,19 +9,24 @@ import { StaticLogin } from './interviewPrepTasks/ReactQuestions/SinglePageApps/
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const queryClient = new QueryClient();
+
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path='/'
-          element={<App />}
-        />
-        <Route
-          path='/login'
-          element={<StaticLogin />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={<App />}
+          />
+          <Route
+            path='/login'
+            element={<StaticLogin />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );

@@ -8,6 +8,7 @@ import {
 } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
 import express from 'express';
+import cors from 'cors';
 
 const authors = [
   { id: 1, name: 'J. K. Rowling' },
@@ -143,6 +144,9 @@ const schema = new GraphQLSchema({
 });
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Create and use the GraphQL handler.
 app.use(

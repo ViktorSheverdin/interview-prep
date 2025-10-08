@@ -9,6 +9,7 @@ import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/S
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
 import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExcelTable/ExcelTable';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
+import { GraphQlCrud } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GraphQlCrud/GraphQlCrud';
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
 import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/InputSanitizing/InputSanitizing';
 import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard';
@@ -21,6 +22,7 @@ import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageA
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Graph QL crud': <GraphQlCrud />,
   'Excel Table': <ExcelTable />,
   'Static Login': <StaticLogin />,
   'Search Bar': <SearchBar />,
