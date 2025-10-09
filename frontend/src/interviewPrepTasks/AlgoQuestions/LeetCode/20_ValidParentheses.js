@@ -11,30 +11,25 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-  const parMap = new Map([
-    ['[', ']'],
-    ['{', '}'],
-    ['(', ')'],
-  ]);
-
+  const map = {
+    '(': ')',
+    '{': '}',
+    '[': ']',
+  };
   const stack = [];
-
   for (let i = 0; i < s.length; i++) {
-    if (parMap.has(s[i])) {
+    if (map[s[i]]) {
       stack.push(s[i]);
     } else {
       if (stack.length === 0) {
         return false;
       }
-
-      const topElement = stack.pop();
-
-      if (parMap.get(topElement) !== s[i]) {
+      const topP = stack.pop();
+      if (map[topP] !== s[i]) {
         return false;
       }
     }
   }
-
   return stack.length === 0;
 };
 
