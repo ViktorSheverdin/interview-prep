@@ -21,9 +21,11 @@ import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePa
 import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/SearchBar/SearchBar';
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
 import { TodoApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/TodoApp/TodoApp';
+import { UserManagementDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserManagementDashboard/UserManagementDashboard';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'User Management Dashboard': <UserManagementDashboard />,
   'Todo App': <TodoApp />,
   'Dynamic Form': <DynamicForm />,
   'Graph QL crud': <GraphQlCrud />,
