@@ -20,9 +20,11 @@ import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageAp
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
 import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/SearchBar/SearchBar';
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
+import { TodoApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/TodoApp/TodoApp';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Todo App': <TodoApp />,
   'Dynamic Form': <DynamicForm />,
   'Graph QL crud': <GraphQlCrud />,
   'Excel Table': <ExcelTable />,
