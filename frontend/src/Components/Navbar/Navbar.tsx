@@ -17,6 +17,7 @@ import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/Job
 import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
 import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard3/JobBoard3';
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
+import { PhotoApp4 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PhotoApp4/PhotoApp4';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
 import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/SearchBar/SearchBar';
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
@@ -25,6 +26,7 @@ import { UserManagementDashboard } from '../../interviewPrepTasks/ReactQuestions
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Photo App 4': <PhotoApp4 />,
   'User Management Dashboard': <UserManagementDashboard />,
   'Todo App': <TodoApp />,
   'Dynamic Form': <DynamicForm />,
