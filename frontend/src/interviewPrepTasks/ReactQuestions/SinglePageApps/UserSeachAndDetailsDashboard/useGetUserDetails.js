@@ -15,6 +15,6 @@ export const useGetUserDetails = () => {
     } finally {
       setIsLoading(false);
     }
-  });
+  }, []);
   return { isLoading, details, getUserDetails };
 };

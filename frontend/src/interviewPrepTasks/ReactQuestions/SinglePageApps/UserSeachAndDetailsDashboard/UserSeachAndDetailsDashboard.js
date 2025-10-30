@@ -88,7 +88,12 @@ export const UserSeachAndDetailsDashboard = () => {
             <option value='canada'>Canada</option>
           </select>
         </div>
-        <button type='submit'>Seach for user</button>
+        <button
+          disabled={isUserSearchLoading}
+          type='submit'
+        >
+          Seach for user
+        </button>
       </form>
       <div>
         <div>
