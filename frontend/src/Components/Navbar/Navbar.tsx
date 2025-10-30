@@ -23,9 +23,11 @@ import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApp
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
 import { TodoApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/TodoApp/TodoApp';
 import { UserManagementDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserManagementDashboard/UserManagementDashboard';
+import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserSeachAndDetailsDashboard/UserSeachAndDetailsDashboard';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'User Search & Details Dashboard': <UserSeachAndDetailsDashboard />,
   'Photo App 4': <PhotoApp4 />,
   'User Management Dashboard': <UserManagementDashboard />,
   'Todo App': <TodoApp />,
