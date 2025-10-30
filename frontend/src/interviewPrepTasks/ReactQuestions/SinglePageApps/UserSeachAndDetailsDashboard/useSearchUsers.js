@@ -20,6 +20,6 @@ export const useSearchUsers = () => {
     } finally {
       setIsLoading(false);
     }
-  });
+  }, []);
   return { isLoading, users, searchUsers };
 };

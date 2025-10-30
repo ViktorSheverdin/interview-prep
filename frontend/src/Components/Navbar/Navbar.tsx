@@ -8,6 +8,7 @@ import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
 import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExcelTable/ExcelTable';
+import { ExpenseReimbursementPortal } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExpenseReimbursementPortal/ExpenseReimbursementPortal';
 import { DynamicForm } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormPrep/DynamicForm';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
 import { GraphQlCrud } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GraphQlCrud/GraphQlCrud';
@@ -27,6 +28,7 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'ExpenseReimbursementPortal': <ExpenseReimbursementPortal />,
   'User Search & Details Dashboard': <UserSeachAndDetailsDashboard />,
   'Photo App 4': <PhotoApp4 />,
   'User Management Dashboard': <UserManagementDashboard />,
