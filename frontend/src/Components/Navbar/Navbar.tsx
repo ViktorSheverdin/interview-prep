@@ -7,6 +7,7 @@ import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
+import { DisplayString } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/DislpayString/DisplayString';
 import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExcelTable/ExcelTable';
 import { ExpenseReimbursementPortal } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExpenseReimbursementPortal/ExpenseReimbursementPortal';
 import { DynamicForm } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormPrep/DynamicForm';
@@ -28,6 +29,7 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Display String with effect': <DisplayString />,
   'ExpenseReimbursementPortal': <ExpenseReimbursementPortal />,
   'User Search & Details Dashboard': <UserSeachAndDetailsDashboard />,
   'Photo App 4': <PhotoApp4 />,
