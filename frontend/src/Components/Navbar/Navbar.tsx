@@ -7,6 +7,8 @@ import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
+import { CommonAnimations } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/CommonAnimations/CommonAnimations';
+import { ProductShowcase } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ProductShowcase/ProductShowcase';
 import { DisplayString } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/DislpayString/DisplayString';
 import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExcelTable/ExcelTable';
 import { ExpenseReimbursementPortal } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExpenseReimbursementPortal/ExpenseReimbursementPortal';
@@ -29,6 +31,8 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Common Animations': <CommonAnimations />,
+  'Product Showcase': <ProductShowcase />,
   'Display String with effect': <DisplayString />,
   'ExpenseReimbursementPortal': <ExpenseReimbursementPortal />,
   'User Search & Details Dashboard': <UserSeachAndDetailsDashboard />,
