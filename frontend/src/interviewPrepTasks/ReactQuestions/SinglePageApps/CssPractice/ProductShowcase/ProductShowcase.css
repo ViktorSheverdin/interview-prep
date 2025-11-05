@@ -1,0 +1,30 @@
+.product-showcase {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.product-card {
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  transform: translateY(-4px) scale(1.04);
+}
+
+.buy-btn {
+  padding: 10px 16px;
+  background-image: linear-gradient(90deg, #4f46e5, #6366f1);
+  border-radius: 8px;
+  color: #f4f1f6;
+}
+
+.buy-btn:hover {
+  background-image: linear-gradient(90deg, #3a31e5, #1416a4);
+}

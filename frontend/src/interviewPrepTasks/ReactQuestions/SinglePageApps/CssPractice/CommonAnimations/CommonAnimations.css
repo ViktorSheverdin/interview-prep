@@ -1,0 +1,62 @@
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 40px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* ======= Base card style ======= */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card h3 {
+  padding: 12px;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+/* ======= 1. Lift + Shadow ======= */
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ======= 2. Scale Up ======= */
+.card-scale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ======= 3. Rotate Slightly ======= */
+.card-rotate:hover {
+  transform: rotate(2deg) translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ======= 4. Fade + Slide ======= */
+.card-fade {
+  opacity: 0.9;
+  transform: translateY(0);
+}
+
+.card-fade:hover {
+  opacity: 1;
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-out;
+}
