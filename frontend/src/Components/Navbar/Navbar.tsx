@@ -7,6 +7,8 @@ import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
+import { ColorPicker } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ColorPicker/ColorPicker';
+import { ColorPickerWrapper } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ColorPicker/ColorPickerWrapper';
 import { CommonAnimations } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/CommonAnimations/CommonAnimations';
 import { ProductShowcase } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ProductShowcase/ProductShowcase';
 import { DisplayString } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/DislpayString/DisplayString';
@@ -31,6 +33,7 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Color picker': <ColorPickerWrapper />,
   'Common Animations': <CommonAnimations />,
   'Product Showcase': <ProductShowcase />,
   'Display String with effect': <DisplayString />,
