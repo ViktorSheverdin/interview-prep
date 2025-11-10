@@ -7,7 +7,6 @@ import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
-import { ColorPicker } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ColorPicker/ColorPicker';
 import { ColorPickerWrapper } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ColorPicker/ColorPickerWrapper';
 import { CommonAnimations } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/CommonAnimations/CommonAnimations';
 import { ProductShowcase } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ProductShowcase/ProductShowcase';
@@ -29,10 +28,12 @@ import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApp
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
 import { TodoApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/TodoApp/TodoApp';
 import { UserManagementDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserManagementDashboard/UserManagementDashboard';
+import { UserNotesDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserNotesDashboard/UserNotesDashboard';
 import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserSeachAndDetailsDashboard/UserSeachAndDetailsDashboard';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'User Notes Dashboard': <UserNotesDashboard />,
   'Color picker': <ColorPickerWrapper />,
   'Common Animations': <CommonAnimations />,
   'Product Showcase': <ProductShowcase />,

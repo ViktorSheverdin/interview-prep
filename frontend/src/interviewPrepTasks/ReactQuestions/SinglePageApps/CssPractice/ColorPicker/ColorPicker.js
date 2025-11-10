@@ -1,4 +1,4 @@
-import './ColorPicker.css';
+// import './ColorPicker.css';
 
 import { useState } from 'react';
 
