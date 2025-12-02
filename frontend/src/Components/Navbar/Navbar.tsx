@@ -7,7 +7,6 @@ import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
-import { ColorPicker } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ColorPicker/ColorPicker';
 import { ColorPickerWrapper } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ColorPicker/ColorPickerWrapper';
 import { CommonAnimations } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/CommonAnimations/CommonAnimations';
 import { ProductShowcase } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/CssPractice/ProductShowcase/ProductShowcase';
@@ -25,6 +24,7 @@ import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApp
 import { JsonViewer } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JsonViewer';
 import { PhotoApp4 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PhotoApp4/PhotoApp4';
 import { PostsComponent } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/PostsComponent';
+import { ProductConfiguratorDashboardWrap } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ProductConfiguratorDashboard/ProductConfiguratorDashboardWrap';
 import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/SearchBar/SearchBar';
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
 import { TodoApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/TodoApp/TodoApp';
@@ -33,6 +33,7 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'ProductConfiguratorDashboard': <ProductConfiguratorDashboardWrap />,
   'Color picker': <ColorPickerWrapper />,
   'Common Animations': <CommonAnimations />,
   'Product Showcase': <ProductShowcase />,
