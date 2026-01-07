@@ -1,0 +1,18 @@
+// The main issue is that concatMap expects the projection function to return
+// and Observable.
+// But when a plain string is returned it is treated as an iterable.
+// It converts toan Observable that emits each character individually
+
+// Another small NIT is that the conditional can be expressed with a ternary
+// To avoid code duplication
+
+import { from, map } from 'rxjs';
+
+from(['a', 'b', 'c', 'd', 'e', 'f'])
+  .pipe(
+    map((s) => {
+      const i = parseInt(s, 16);
+      return `${i % 2 === 0 ? 'even' : 'odd'}: ${s} (${i})`;
+    })
+  )
+  .subscribe((x) => console.log(x));
