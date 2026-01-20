@@ -35,5 +35,7 @@ module.exports = {
     'no-unused-vars': 'off',
     // Set TypeScript unused vars to warning instead of error
     '@typescript-eslint/no-unused-vars': 'warn',
+    // Disable an error for an empry code block
+    'no-empty': 'off',
   },
 };
