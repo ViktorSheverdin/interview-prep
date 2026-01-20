@@ -4,6 +4,7 @@ import './Navbar.css';
 import React, { useState } from 'react';
 
 import { ComponentWithObserver } from '../../interviewPrepTasks/FrontendPatterns/Observable/ComponentWithObserver';
+import { Dropdown } from '../../interviewPrepTasks/ReactQuestions/Layouts/Dropdown/Dropdown';
 import { Layouts } from '../../interviewPrepTasks/ReactQuestions/Layouts/Layouts';
 import { AlbumPhotoApplication } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/AlbumPhotoApplication';
 import { BookApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/BookApp';
@@ -29,10 +30,13 @@ import { SearchBar } from '../../interviewPrepTasks/ReactQuestions/SinglePageApp
 import { StaticLogin } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/StaticLogin/StaticLogin';
 import { TodoApp } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/TodoApp/TodoApp';
 import { UserManagementDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserManagementDashboard/UserManagementDashboard';
+import { UserRegistrationForm } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserRegistrationForm/UserRegistrationForm';
 import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/UserSeachAndDetailsDashboard/UserSeachAndDetailsDashboard';
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'UserRegistrationForm': <UserRegistrationForm />,
+  'Dropdown': <Dropdown />,
   'ProductConfiguratorDashboard': <ProductConfiguratorDashboardWrap />,
   'Color picker': <ColorPickerWrapper />,
   'Common Animations': <CommonAnimations />,

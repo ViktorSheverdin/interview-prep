@@ -28,8 +28,8 @@ export const ExpenseReimbursementPortal = () => {
     setDisplayExpenses(
       expenses.slice(
         page * ITEMS_PER_PAGE,
-        page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-      )
+        page * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
+      ),
     );
   }, [page, expenses]);
 
@@ -43,7 +43,7 @@ export const ExpenseReimbursementPortal = () => {
     return String(email)
       .toLowerCase()
       .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       );
   };
 
@@ -82,8 +82,8 @@ export const ExpenseReimbursementPortal = () => {
   const renderDetails = () => {
     if (isDetailsLoading) return <div>Loading Details...</div>;
 
-    const hasFlightExpenses = expenseDetails.body.includes('dolorem');
-    if (hasFlightExpenses) return <div>Requires manager approval</div>;
+    // const hasFlightExpenses = expenseDetails.body.includes('dolorem');
+    // if (hasFlightExpenses) return <div>Requires manager approval</div>;
 
     return (
       <div>
