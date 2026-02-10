@@ -16,9 +16,11 @@ import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageAp
 import { ExpenseReimbursementPortal } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExpenseReimbursementPortal/ExpenseReimbursementPortal';
 import { DynamicForm } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormPrep/DynamicForm';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
+import { GeneralInterviewFunctions } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/GeneralInterviewFunctions';
 import { GraphQlCrud } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GraphQlCrud/GraphQlCrud';
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
 import { InputSanitizing } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/InputSanitizing/InputSanitizing';
+import { InterviewWithAlex } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/InterviewWithAlex/InterviewWithAlex';
 import JobBoard from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard';
 import JobBoard2 from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard2';
 import { JobBoard3 } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/JobBoard3/JobBoard3';
@@ -35,6 +37,8 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'General Interview functions': <GeneralInterviewFunctions />,
+  'Interview With Alex': <InterviewWithAlex />,
   'UserRegistrationForm': <UserRegistrationForm />,
   'Dropdown': <Dropdown />,
   'ProductConfiguratorDashboard': <ProductConfiguratorDashboardWrap />,

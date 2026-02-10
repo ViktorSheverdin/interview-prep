@@ -3,6 +3,23 @@ import { useEffect, useState } from 'react';
 import { useGetDetails } from './useGetDetails';
 import { useSeachExpenses } from './useSeachExpenses';
 
+// .modal {
+//   display: grid;
+//   gap: 2px;
+//   grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+//   max-width: 110px;
+//   max-height: 100px;
+//   overflow: auto;
+//   scrollbar-width: none;
+//   position: absolute;
+//   background-color: aliceblue;
+//   padding: 6px;
+//   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+// }
+// .color-box:hover {
+//   cursor: pointer;
+// }
+
 const ITEMS_PER_PAGE = 5;
 
 export const ExpenseReimbursementPortal = () => {
