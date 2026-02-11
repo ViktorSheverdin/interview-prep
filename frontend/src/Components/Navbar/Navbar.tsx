@@ -18,6 +18,8 @@ import { DynamicForm } from '../../interviewPrepTasks/ReactQuestions/SinglePageA
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
 import { CompactInterview } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/CompactInterview';
 import { CompactInterviewSolutions } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/CompactInterview.solutions';
+import { EmployeeDirectory } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/EmployeeDirectory';
+import { EmployeeDirectorySolutions } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/EmployeeDirectory.solutions';
 import { GeneralInterviewFunctions } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/GeneralInterviewFunctions';
 import { GraphQlCrud } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GraphQlCrud/GraphQlCrud';
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
@@ -39,6 +41,8 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Employee Directory (16Q - 1h)': <EmployeeDirectory />,
+  'Employee Directory - SOLUTIONS': <EmployeeDirectorySolutions />,
   'Compact Interview (20Q - 1.5h)': <CompactInterview />,
   'Compact Interview - SOLUTIONS': <CompactInterviewSolutions />,
   'General Interview functions': <GeneralInterviewFunctions />,
