@@ -16,6 +16,8 @@ import { ExcelTable } from '../../interviewPrepTasks/ReactQuestions/SinglePageAp
 import { ExpenseReimbursementPortal } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/ExpenseReimbursementPortal/ExpenseReimbursementPortal';
 import { DynamicForm } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormPrep/DynamicForm';
 import { FormWithStateManagement } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/FormWithStateManagement';
+import { CompactInterview } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/CompactInterview';
+import { CompactInterviewSolutions } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/CompactInterview.solutions';
 import { GeneralInterviewFunctions } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GeneralInterviewFunctions/GeneralInterviewFunctions';
 import { GraphQlCrud } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/GraphQlCrud/GraphQlCrud';
 import { HRInterviewTest } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/HRInterviewTest';
@@ -37,6 +39,8 @@ import { UserSeachAndDetailsDashboard } from '../../interviewPrepTasks/ReactQues
 import { WordOmitter } from '../../interviewPrepTasks/ReactQuestions/SinglePageApps/WordOmitter';
 
 const PAGES: Record<string, React.ReactNode> = {
+  'Compact Interview (20Q - 1.5h)': <CompactInterview />,
+  'Compact Interview - SOLUTIONS': <CompactInterviewSolutions />,
   'General Interview functions': <GeneralInterviewFunctions />,
   'Interview With Alex': <InterviewWithAlex />,
   'UserRegistrationForm': <UserRegistrationForm />,
