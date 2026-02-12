@@ -15,7 +15,7 @@ export const PhotoApp4 = () => {
 
   useEffect(() => {
     const filteredAlbums = listOfAlbums.filter((album) =>
-      album.title.toLowerCase().includes(searchKey.toLowerCase())
+      album.title.toLowerCase().includes(searchKey.toLowerCase()),
     );
     setDisplayAlbums(filteredAlbums);
   }, [searchKey, listOfAlbums]);
