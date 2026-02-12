@@ -365,19 +365,30 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     <div className={`task-card priority-${task.priority}`}>
       <h3>{task.title}</h3>
       <p>{task.description}</p>
-      <div className="task-meta">
-        <span className={`task-badge priority-${task.priority}`}>{task.priority}</span>
-        <span className={`task-badge status-${task.status}`}>{task.status}</span>
+      <div className='task-meta'>
+        <span className={`task-badge priority-${task.priority}`}>
+          {task.priority}
+        </span>
+        <span className={`task-badge status-${task.status}`}>
+          {task.status}
+        </span>
         <span>Due: {task.dueDate}</span>
       </div>
       {task.tags.length > 0 && (
-        <div className="task-tags">
+        <div className='task-tags'>
           {task.tags.map((tag) => {
-            return <span key={tag} className="tag">{tag}</span>;
+            return (
+              <span
+                key={tag}
+                className='tag'
+              >
+                {tag}
+              </span>
+            );
           })}
         </div>
       )}
-      <div className="task-actions">
+      <div className='task-actions'>
         <button
           onClick={() => {
             onEdit(task);
