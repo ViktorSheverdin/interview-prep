@@ -1,6 +1,6 @@
-import './GeneralInterviewFunctions.css';
+import "./GeneralInterviewFunctions.css";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // =====================================================================
 // INTERVIEW SESSION 1: Sorting, Filtering & Display (30 min)
@@ -21,14 +21,14 @@ export interface Employee {
 export function sortEmployees(
   employees: Employee[],
   field: keyof Employee,
-  order: 'asc' | 'desc' = 'asc',
+  order: "asc" | "desc" = "asc",
 ): Employee[] {
   return [...employees].sort((a, b) => {
     const aField = a[field];
     const bField = b[field];
 
-    if (aField < bField) return order === 'asc' ? -1 : 1;
-    if (aField > bField) return order === 'asc' ? 1 : -1;
+    if (aField < bField) return order === "asc" ? -1 : 1;
+    if (aField > bField) return order === "asc" ? 1 : -1;
     return 0;
   });
 }
@@ -40,7 +40,7 @@ export function filterByDepartment(
   department: string,
 ): Employee[] {
   // Your implementation here
-  if (department === '') return [...employees];
+  if (department === "") return [...employees];
 
   return employees.filter((e) => e.department === department);
 }
@@ -110,7 +110,7 @@ interface EmployeeTableProps {
   employees: Employee[];
   onSort: (field: keyof Employee) => void;
   sortField: keyof Employee;
-  sortOrder: 'asc' | 'desc';
+  sortOrder: "asc" | "desc";
 }
 
 export const EmployeeTable: React.FC<EmployeeTableProps> = ({
@@ -123,57 +123,57 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({
   // Each header should be clickable and show sort direction
 
   return (
-    <table className='product-table'>
+    <table className="product-table">
       <thead>
         <tr>
           <th
             onClick={() => {
-              onSort('name');
+              onSort("name");
             }}
           >
-            Name{' '}
-            {sortField === 'name' && (
-              <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
+            Name{" "}
+            {sortField === "name" && (
+              <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
             )}
           </th>
           <th
             onClick={() => {
-              onSort('email');
+              onSort("email");
             }}
           >
-            email{' '}
-            {sortField === 'email' && (
-              <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
+            email{" "}
+            {sortField === "email" && (
+              <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
             )}
           </th>
           <th
             onClick={() => {
-              onSort('salary');
+              onSort("salary");
             }}
           >
-            salary{' '}
-            {sortField === 'salary' && (
-              <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
+            salary{" "}
+            {sortField === "salary" && (
+              <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
             )}
           </th>
           <th
             onClick={() => {
-              onSort('yearsOfExperience');
+              onSort("yearsOfExperience");
             }}
           >
-            yearsOfExperience{' '}
-            {sortField === 'yearsOfExperience' && (
-              <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
+            yearsOfExperience{" "}
+            {sortField === "yearsOfExperience" && (
+              <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
             )}
           </th>
           <th
             onClick={() => {
-              onSort('department');
+              onSort("department");
             }}
           >
-            department{' '}
-            {sortField === 'department' && (
-              <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
+            department{" "}
+            {sortField === "department" && (
+              <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
             )}
           </th>
         </tr>
@@ -224,8 +224,8 @@ export interface EmployeeFormData {
 // TODO Q9: Implement validateRequired - check if field is not empty
 export function validateRequired(value: string): string {
   // Return error message if invalid, empty string if valid
-  if (!value.trim()) return 'Required';
-  return '';
+  if (!value.trim()) return "Required";
+  return "";
 }
 
 // TODO Q10: Implement validateEmail - check if value is a valid email format
@@ -234,18 +234,18 @@ export function validateEmail(value: string): string {
   const testPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const error = validateRequired(value);
   if (error) return error;
-  if (!testPattern.test(value)) return 'invalid email';
+  if (!testPattern.test(value)) return "invalid email";
   // Return error message if invalid, empty string if valid
-  return '';
+  return "";
 }
 
 // TODO Q11a: Implement validateIsNumber - check if value is a valid number
 export function validateIsNumber(value: string): string {
   const error = validateRequired(value);
   if (error) return error;
-  if (isNaN(Number(value))) return 'Invalid Number';
+  if (isNaN(Number(value))) return "Invalid Number";
   // Return error message if invalid, empty string if valid
-  return '';
+  return "";
 }
 
 // TODO Q11b: Implement validatePositiveNumber - check if number is positive
@@ -253,17 +253,17 @@ export function validatePositiveNumber(value: string): string {
   // Return error message if invalid, empty string if valid
   const error = validateIsNumber(value);
   if (error) return error;
-  if (Number(value) <= 0) return 'Must be positive';
-  return '';
+  if (Number(value) <= 0) return "Must be positive";
+  return "";
 }
 
 // TODO Q12a: Implement validateInteger - check if value is an integer
 export function validateInteger(value: string): string {
   const error = validateRequired(value);
   if (error) return error;
-  if (!Number.isInteger(Number(value))) return 'Must be int';
+  if (!Number.isInteger(Number(value))) return "Must be int";
   // Return error message if invalid, empty string if valid
-  return '';
+  return "";
 }
 
 // TODO Q12b: Implement validateRange - check if number is within min/max
@@ -271,9 +271,9 @@ export function validateRange(value: string, min: number, max: number): string {
   // Return error message if invalid, empty string if valid
   const error = validateIsNumber(value);
   if (error) return error;
-  if (Number(value) > max) return 'Must be less';
-  if (Number(value) < min) return 'Must be mroe';
-  return '';
+  if (Number(value) > max) return "Must be less";
+  if (Number(value) < min) return "Must be mroe";
+  return "";
 }
 
 // TODO Q13: Implement validateEmployeeForm - validate entire form
@@ -291,8 +291,8 @@ export function validateEmployeeForm(
 
   const nameE =
     validateRequired(data.name) || data.name.trim().length < 2
-      ? 'Too small'
-      : '';
+      ? "Too small"
+      : "";
   if (nameE) errors.name = nameE;
 
   const emailE = validateRequired(data.email) || validateEmail(data.email);
@@ -332,17 +332,17 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
   initialData,
 }) => {
   const [formData, setFormData] = useState<EmployeeFormData>({
-    name: initialData?.name || '',
-    email: initialData?.email || '',
-    salary: initialData?.salary || '',
-    yearsOfExperience: initialData?.yearsOfExperience || '',
-    department: initialData?.department || '',
+    name: initialData?.name || "",
+    email: initialData?.email || "",
+    salary: initialData?.salary || "",
+    yearsOfExperience: initialData?.yearsOfExperience || "",
+    department: initialData?.department || "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (field: keyof EmployeeFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: '' }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -351,12 +351,9 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
   };
 
   return (
-    <form
-      className='product-form'
-      onSubmit={handleSubmit}
-    >
+    <form className="product-form" onSubmit={handleSubmit}>
       {/* TODO: Implement form fields with error display */}
-      <button type='submit'>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
@@ -411,88 +408,88 @@ export const EmployeeDirectoryApp: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([
     {
       id: 1,
-      name: 'Alice Johnson',
-      email: 'alice@company.com',
+      name: "Alice Johnson",
+      email: "alice@company.com",
       salary: 95000,
       yearsOfExperience: 8,
-      department: 'Engineering',
+      department: "Engineering",
     },
     {
       id: 2,
-      name: 'Bob Smith',
-      email: 'bob@company.com',
+      name: "Bob Smith",
+      email: "bob@company.com",
       salary: 72000,
       yearsOfExperience: 3,
-      department: 'Marketing',
+      department: "Marketing",
     },
     {
       id: 3,
-      name: 'Carol Davis',
-      email: 'carol@company.com',
+      name: "Carol Davis",
+      email: "carol@company.com",
       salary: 110000,
       yearsOfExperience: 12,
-      department: 'Engineering',
+      department: "Engineering",
     },
     {
       id: 4,
-      name: 'Dan Wilson',
-      email: 'dan@company.com',
+      name: "Dan Wilson",
+      email: "dan@company.com",
       salary: 65000,
       yearsOfExperience: 1,
-      department: 'Sales',
+      department: "Sales",
     },
     {
       id: 5,
-      name: 'Eve Martinez',
-      email: 'eve@company.com',
+      name: "Eve Martinez",
+      email: "eve@company.com",
       salary: 88000,
       yearsOfExperience: 5,
-      department: 'Engineering',
+      department: "Engineering",
     },
     {
       id: 6,
-      name: 'Frank Brown',
-      email: 'frank@company.com',
+      name: "Frank Brown",
+      email: "frank@company.com",
       salary: 78000,
       yearsOfExperience: 4,
-      department: 'Marketing',
+      department: "Marketing",
     },
     {
       id: 7,
-      name: 'Grace Lee',
-      email: 'grace@company.com',
+      name: "Grace Lee",
+      email: "grace@company.com",
       salary: 105000,
       yearsOfExperience: 10,
-      department: 'Sales',
+      department: "Sales",
     },
     {
       id: 8,
-      name: 'Henry Taylor',
-      email: 'henry@company.com',
+      name: "Henry Taylor",
+      email: "henry@company.com",
       salary: 55000,
       yearsOfExperience: 0,
-      department: 'Intern',
+      department: "Intern",
     },
   ]);
 
   const [showForm, setShowForm] = useState(false);
-  const [sortField, setSortField] = useState<keyof Employee>('name');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortField, setSortField] = useState<keyof Employee>("name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [filters, setFilters] = useState<FilterState>({
-    search: '',
-    department: '',
-    minSalary: '',
-    maxSalary: '',
-    minExperience: '',
-    maxExperience: '',
+    search: "",
+    department: "",
+    minSalary: "",
+    maxSalary: "",
+    minExperience: "",
+    maxExperience: "",
   });
 
   // TODO: Implement handleSort - toggle sort order if same field, default to asc
   const handleSort = (field: keyof Employee) => {
     if (sortField === field) {
-      setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
     } else {
-      setSortOrder('asc');
+      setSortOrder("asc");
       setSortField(field);
     }
   };
@@ -530,18 +527,18 @@ export const EmployeeDirectoryApp: React.FC = () => {
   const departments = Array.from(new Set(employees.map((e) => e.department)));
 
   return (
-    <div className='product-manager'>
+    <div className="product-manager">
       <header>
         <h1>Employee Directory</h1>
         <button onClick={() => setShowForm(true)}>+ Add Employee</button>
       </header>
 
       {/* TODO: Search and Filters */}
-      <div className='filters'>
+      <div className="filters">
         <div>
           <input
-            name='search'
-            id='search'
+            name="search"
+            id="search"
             value={filters.search}
             onChange={(e) => handleUpdateFilters(e)}
           />
@@ -550,19 +547,19 @@ export const EmployeeDirectoryApp: React.FC = () => {
         {/* TODO: Department dropdown */}
         {/* TODO: Salary range inputs */}
         <div>
-          <label htmlFor='minSalary'>Min Salary</label>
+          <label htmlFor="minSalary">Min Salary</label>
           <input
-            name='minSalary'
-            id='minSalary'
+            name="minSalary"
+            id="minSalary"
             value={filters.minSalary}
             onChange={(e) => {
               handleUpdateFilters(e);
             }}
           />
-          <label htmlFor='maxSalary'>Max Salary</label>
+          <label htmlFor="maxSalary">Max Salary</label>
           <input
-            name='maxSalary'
-            id='maxSalary'
+            name="maxSalary"
+            id="maxSalary"
             value={filters.maxSalary}
             onChange={(e) => {
               handleUpdateFilters(e);
@@ -573,7 +570,7 @@ export const EmployeeDirectoryApp: React.FC = () => {
       </div>
 
       {/* TODO: Stats */}
-      <div className='stats'>
+      <div className="stats">
         {/* TODO: Show employee count, salary range, avg salary, avg experience */}
       </div>
 
@@ -587,16 +584,14 @@ export const EmployeeDirectoryApp: React.FC = () => {
 
       {/* TODO: Form Modal */}
       {showForm && (
-        <div className='modal-overlay'>
-          <div className='modal'>
-            <button
-              className='close-btn'
-              onClick={() => setShowForm(false)}
-            >
+        <div className="modal-overlay">
+          <div className="modal">
+            <button className="close-btn" onClick={() => setShowForm(false)}>
               ×
             </button>
             <EmployeeForm onSubmit={handleAddEmployee} />
           </div>
+          <div>new text here</div>
         </div>
       )}
     </div>
