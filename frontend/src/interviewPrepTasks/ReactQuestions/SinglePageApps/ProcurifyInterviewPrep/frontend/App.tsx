@@ -295,19 +295,23 @@ const ProcurifyInterviewPrep: React.FC = () => {
     <div style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
       <h1>Procurify Spend Management</h1>
       <p>Start building your features here. See QUESTIONS.md for tasks.</p>
-      {kpis && (
-        <div>
-          KPIs:
-          <div>
+      {isKpiLoading
+        ? "Loading..."
+        : kpis && (
             <div>
-              Pending Approvals:{formatCurrency(kpis.pending_approvals)}
+              KPIs:
+              <div>
+                <div>
+                  Pending Approvals:{formatCurrency(kpis.pending_approvals)}
+                </div>
+                <div>Month spend:{formatCurrency(kpis.monthly_spend)}</div>
+              </div>
             </div>
-            <div>Month spend:{formatCurrency(kpis.monthly_spend)}</div>
-          </div>
-        </div>
-      )}
+          )}
       {/* ── Q1: Build your KPI Dashboard Cards here ── */}
-      {expenses && expenses?.length > 0 ? (
+      {isExpencesLoading ? (
+        "Loading..."
+      ) : expenses && expenses?.length > 0 ? (
         <ListOfExpenses
           expenses={sortedExpenses}
           handleTableSort={handleTableSort}
