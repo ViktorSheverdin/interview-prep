@@ -1,4 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useEffectEvent,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { useFetch } from "./hooks/useFetch";
 import { useGetKpis } from "./hooks/useGetKpis";
 import {
@@ -33,7 +40,6 @@ interface IListOfExpenses {
   handleTableSort: (column: keyof Expense) => void;
   filters: IFilters;
   setFilters: (filter: IFilters) => void;
-  expenseInfo: Expense | null;
   setSelectedExpense: (expense: Expense) => void;
 }
 const statusColor: Record<ExpenseStatus, string> = {
@@ -108,7 +114,6 @@ const ListOfExpenses = (props: IListOfExpenses) => {
     handleTableSort,
     filters,
     setFilters,
-    expenseInfo,
     setSelectedExpense,
   } = props;
   const [tooltip, setTooltip] = useState<{
@@ -219,7 +224,8 @@ const ListOfExpenses = (props: IListOfExpenses) => {
               return (
                 <tr
                   key={String(expense.id)}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setSelectedExpense(expense);
                   }}
                 >
@@ -237,10 +243,6 @@ const ListOfExpenses = (props: IListOfExpenses) => {
             })}
           </tbody>
         </table>
-        <div>
-          Expense Info:
-          <div>Expense vendor id: {expenseInfo?.vendor_id}</div>
-        </div>
       </div>
     </div>
   );
@@ -262,6 +264,18 @@ const ProcurifyInterviewPrep: React.FC = () => {
   const { data: expenseInfo } = useFetch<Expense>(
     selectedExpense?.id ? `expenses/${selectedExpense?.id ?? ""}` : null,
   );
+
+  const infoRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (infoRef.current && !infoRef.current.contains(e.target as Node)) {
+        setSelectedExpense(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [selectedExpense]);
 
   const [sortField, setSortField] = useState<keyof Expense>("title");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -319,12 +333,30 @@ const ProcurifyInterviewPrep: React.FC = () => {
           sortField={sortField}
           filters={filters}
           setFilters={setFilters}
-          expenseInfo={expenseInfo}
           setSelectedExpense={setSelectedExpense}
         />
       ) : null}
       {/* ── Q2: Build your Expense List Table here ── */}
 
+      {selectedExpense && (
+        <div
+          ref={infoRef}
+          style={{
+            position: "fixed",
+            right: 0,
+            top: 0,
+            height: "100vh",
+            width: "400px",
+            background: "white",
+            boxShadow: "-2px 0 8px rgba(0,0,0,0.15)",
+            padding: "1rem",
+          }}
+        >
+          Expense Info:
+          <div>Expense vendor id: {expenseInfo?.vendor_id}</div>
+          <button onClick={() => setSelectedExpense(null)}>Close</button>
+        </div>
+      )}
       {/* ── Continue adding features as you progress through the questions ── */}
     </div>
   );
