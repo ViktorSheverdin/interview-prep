@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchJson } from "../api";
 const BASE_URL = "http://localhost:8000/api/";
-export const useFetch = <T>(url: string) => {
+export const useFetch = <T>(url: string | null) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (!url) return;
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -22,6 +23,6 @@ export const useFetch = <T>(url: string) => {
       }
     };
     fetchData();
-  }, []);
+  }, [url]);
   return { data, error, isLoading };
 };

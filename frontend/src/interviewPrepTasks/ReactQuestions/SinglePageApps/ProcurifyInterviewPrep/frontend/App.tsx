@@ -33,6 +33,8 @@ interface IListOfExpenses {
   handleTableSort: (column: keyof Expense) => void;
   filters: IFilters;
   setFilters: (filter: IFilters) => void;
+  expenseInfo: Expense | null;
+  setSelectedExpense: (expense: Expense) => void;
 }
 const statusColor: Record<ExpenseStatus, string> = {
   [ExpenseStatus.APPROVED]: "green",
@@ -106,6 +108,8 @@ const ListOfExpenses = (props: IListOfExpenses) => {
     handleTableSort,
     filters,
     setFilters,
+    expenseInfo,
+    setSelectedExpense,
   } = props;
   const [tooltip, setTooltip] = useState<{
     id: string;
@@ -187,46 +191,57 @@ const ListOfExpenses = (props: IListOfExpenses) => {
         setFilters={setFilters}
         expenses={expenses}
       />
-      <table>
-        <thead>
-          <tr>
-            {COLUMNS.map((col) => {
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <table>
+          <thead>
+            <tr>
+              {COLUMNS.map((col) => {
+                return (
+                  <th
+                    key={String(col.key)}
+                    onClick={() => {
+                      handleTableSort(col.key);
+                    }}
+                  >
+                    {col.label}
+                    {col.key === sortField
+                      ? sortOrder === "asc"
+                        ? "^"
+                        : "V"
+                      : null}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {expenses.map((expense) => {
               return (
-                <th
-                  key={String(col.key)}
+                <tr
+                  key={String(expense.id)}
                   onClick={() => {
-                    handleTableSort(col.key);
+                    setSelectedExpense(expense);
                   }}
                 >
-                  {col.label}
-                  {col.key === sortField
-                    ? sortOrder === "asc"
-                      ? "^"
-                      : "V"
-                    : null}
-                </th>
+                  {COLUMNS.map((col) => {
+                    return (
+                      <td key={String(col.key)}>
+                        {col.render
+                          ? col.render(expense[col.key], expense)
+                          : String(expense[col.key])}
+                      </td>
+                    );
+                  })}
+                </tr>
               );
             })}
-          </tr>
-        </thead>
-        <tbody>
-          {expenses.map((expense) => {
-            return (
-              <tr key={String(expense.id)}>
-                {COLUMNS.map((col) => {
-                  return (
-                    <td key={String(col.key)}>
-                      {col.render
-                        ? col.render(expense[col.key], expense)
-                        : String(expense[col.key])}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+        <div>
+          Expense Info:
+          <div>Expense vendor id: {expenseInfo?.vendor_id}</div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -244,13 +259,9 @@ const ProcurifyInterviewPrep: React.FC = () => {
     useFetch<Expense[]>("expenses");
 
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
-  const [selectedExpenseInfo, setSelectedExpenseInfo] =
-    useState<Expense | null>(null);
-
-  // useEffect(() => {
-  //   const { data: expenseInfo, isLoading: isExpenseInfoLoading } =
-  //     useFetch<Expense>(`expenses/${selectedExpense?.id}`);
-  // });
+  const { data: expenseInfo } = useFetch<Expense>(
+    selectedExpense?.id ? `expenses/${selectedExpense?.id ?? ""}` : null,
+  );
 
   const [sortField, setSortField] = useState<keyof Expense>("title");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -304,6 +315,8 @@ const ProcurifyInterviewPrep: React.FC = () => {
           sortField={sortField}
           filters={filters}
           setFilters={setFilters}
+          expenseInfo={expenseInfo}
+          setSelectedExpense={setSelectedExpense}
         />
       ) : null}
       {/* ── Q2: Build your Expense List Table here ── */}
