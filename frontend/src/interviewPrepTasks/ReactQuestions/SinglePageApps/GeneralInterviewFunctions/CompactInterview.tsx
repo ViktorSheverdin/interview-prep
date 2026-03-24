@@ -1,6 +1,6 @@
-import './GeneralInterviewFunctions.css';
+import "./GeneralInterviewFunctions.css";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // =====================================================================
 // INTERVIEW SESSION 1: Sorting & Basic Filtering (30 min)
@@ -19,15 +19,15 @@ export interface Product {
 export function sortProducts(
   products: Product[],
   field: keyof Product,
-  order: 'asc' | 'desc' = 'asc',
+  order: "asc" | "desc" = "asc",
 ): Product[] {
   const sortedProducts = [...products];
   sortedProducts.sort((a, b) => {
     const aField = a[field];
     const bField = b[field];
 
-    if (aField < bField) return order === 'asc' ? -1 : 1;
-    if (aField > bField) return order === 'asc' ? 1 : -1;
+    if (aField < bField) return order === "asc" ? -1 : 1;
+    if (aField > bField) return order === "asc" ? 1 : -1;
 
     return 0;
   });
@@ -39,7 +39,7 @@ export function filterByCategory(
   products: Product[],
   category: string,
 ): Product[] {
-  if (category === '') return [...products];
+  if (category === "") return [...products];
   return products.filter((product) => product.category === category);
 }
 
@@ -68,7 +68,7 @@ interface ProductTableProps {
   products: Product[];
   onSort: (field: keyof Product) => void;
   sortField: keyof Product;
-  sortOrder: 'asc' | 'desc';
+  sortOrder: "asc" | "desc";
 }
 
 export const ProductTable: React.FC<ProductTableProps> = ({
@@ -79,21 +79,21 @@ export const ProductTable: React.FC<ProductTableProps> = ({
 }) => {
   // Your implementation here
   return (
-    <table className='product-table'>
+    <table className="product-table">
       <thead>
         <tr>
-          <th onClick={() => onSort('name')}>
-            Name {sortField === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+          <th onClick={() => onSort("name")}>
+            Name {sortField === "name" && (sortOrder === "asc" ? "↑" : "↓")}
           </th>
-          <th onClick={() => onSort('price')}>
-            Price {sortField === 'price' && (sortOrder === 'asc' ? '↑' : '↓')}
+          <th onClick={() => onSort("price")}>
+            Price {sortField === "price" && (sortOrder === "asc" ? "↑" : "↓")}
           </th>
-          <th onClick={() => onSort('stock')}>
-            Stock {sortField === 'stock' && (sortOrder === 'asc' ? '↑' : '↓')}
+          <th onClick={() => onSort("stock")}>
+            Stock {sortField === "stock" && (sortOrder === "asc" ? "↑" : "↓")}
           </th>
-          <th onClick={() => onSort('category')}>
-            Category{' '}
-            {sortField === 'category' && (sortOrder === 'asc' ? '↑' : '↓')}
+          <th onClick={() => onSort("category")}>
+            Category{" "}
+            {sortField === "category" && (sortOrder === "asc" ? "↑" : "↓")}
           </th>
         </tr>
       </thead>
@@ -161,8 +161,8 @@ export interface ProductFormData {
 // TODO Q8: Implement validateRequired - check if field is not empty
 export function validateRequired(value: string): string {
   // Return error message if invalid, empty string if valid
-  if (!value.trim()) return 'Required';
-  return '';
+  if (!value.trim()) return "Required";
+  return "";
 }
 
 // TODO Q9: Implement validateIsNumber - check if value is a valid number
@@ -170,8 +170,8 @@ export function validateIsNumber(value: string): string {
   // Return error message if invalid, empty string if valid
   const error = validateRequired(value);
   if (error) return error;
-  if (isNaN(Number(value))) return 'Must be a number';
-  return '';
+  if (isNaN(Number(value))) return "Must be a number";
+  return "";
 }
 
 // TODO Q10: Implement validatePositiveNumber - check if number is positive
@@ -179,17 +179,17 @@ export function validatePositiveNumber(value: string): string {
   // Return error message if invalid, empty string if valid
   const error = validateIsNumber(value);
   if (error) return error;
-  if (Number(value) <= 0) return 'Must be positive';
-  return '';
+  if (Number(value) <= 0) return "Must be positive";
+  return "";
 }
 
 // TODO Q11: Implement validateInteger - check if value is an integer
 export function validateInteger(value: string): string {
   const error = validateIsNumber(value);
   if (error) return error;
-  if (!Number.isInteger(Number(value))) return 'Must be integer';
+  if (!Number.isInteger(Number(value))) return "Must be integer";
   // Return error message if invalid, empty string if valid
-  return '';
+  return "";
 }
 
 // TODO Q12: Implement validateRange - check if number is within min/max
@@ -201,7 +201,7 @@ export function validateRange(value: string, min: number, max: number): string {
   const num = Number(value);
   if (num < min) return `Must be at least ${min}`;
   if (num > max) return `Must be at most ${max}`;
-  return '';
+  return "";
 }
 
 // TODO Q13: Implement validateProductForm - validate entire form
@@ -219,7 +219,7 @@ const runValidators = (
     const error = validator(value);
     if (error) return error;
   }
-  return '';
+  return "";
 };
 
 export function validateProductForm(
@@ -228,7 +228,7 @@ export function validateProductForm(
   const errors: Record<string, string> = {};
 
   const nameError = runValidators(data.name, validateRequired, (v) =>
-    v.trim().length < 2 ? 'Min 2 chars' : '',
+    v.trim().length < 2 ? "Min 2 chars" : "",
   );
   if (nameError) errors.name = nameError;
 
@@ -266,16 +266,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
 }) => {
   const [formData, setFormData] = useState<ProductFormData>({
-    name: initialData?.name || '',
-    price: initialData?.price || '',
-    stock: initialData?.stock || '',
-    category: initialData?.category || '',
+    name: initialData?.name || "",
+    price: initialData?.price || "",
+    stock: initialData?.stock || "",
+    category: initialData?.category || "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (field: keyof ProductFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: '' }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -289,56 +289,53 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   };
 
   return (
-    <form
-      className='product-form'
-      onSubmit={handleSubmit}
-    >
+    <form className="product-form" onSubmit={handleSubmit}>
       {/* TODO: Implement form fields with error display */}
       <div>
-        <label htmlFor='name'>Name</label>
+        <label htmlFor="name">Name</label>
         <input
-          id='name'
-          name='name'
+          id="name"
+          name="name"
           value={formData.name}
-          onChange={(e) => handleChange('name', e.target.value)}
+          onChange={(e) => handleChange("name", e.target.value)}
         />
-        {errors.name && <span className='error'>{errors.name}</span>}
+        {errors.name && <span className="error">{errors.name}</span>}
       </div>
       <div>
-        <label htmlFor='price'>price</label>
+        <label htmlFor="price">price</label>
         <input
-          id='price'
-          name='price'
-          type='number'
+          id="price"
+          name="price"
+          type="number"
           value={formData.price}
-          onChange={(e) => handleChange('price', e.target.value)}
+          onChange={(e) => handleChange("price", e.target.value)}
         />
-        {errors.price && <span className='error'>{errors.price}</span>}
+        {errors.price && <span className="error">{errors.price}</span>}
       </div>
       <div>
-        <label htmlFor='stock'>stock</label>
+        <label htmlFor="stock">stock</label>
         <input
-          id='stock'
-          name='stock'
-          type='number'
+          id="stock"
+          name="stock"
+          type="number"
           value={formData.stock}
-          onChange={(e) => handleChange('stock', e.target.value)}
+          onChange={(e) => handleChange("stock", e.target.value)}
         />
-        {errors.stock && <span className='error'>{errors.stock}</span>}
+        {errors.stock && <span className="error">{errors.stock}</span>}
       </div>
       <div>
-        <label htmlFor='category'>category</label>
+        <label htmlFor="category">category</label>
         <input
-          id='category'
-          name='category'
+          id="category"
+          name="category"
           value={formData.category}
-          onChange={(e) => handleChange('category', e.target.value)}
+          onChange={(e) => handleChange("category", e.target.value)}
         />
-        {errors.category && <span className='error'>{errors.category}</span>}
+        {errors.category && <span className="error">{errors.category}</span>}
       </div>
 
       {/* TODO: Add price, stock, category fields */}
-      <button type='submit'>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
@@ -381,14 +378,14 @@ export function searchProducts(products: Product[], query: string): Product[] {
 
 export function multiFieldSort(
   products: Product[],
-  categories: { field: keyof Product; order?: 'asc' | 'desc' }[],
+  categories: { field: keyof Product; order?: "asc" | "desc" }[],
 ): Product[] {
   return [...products].sort((a, b) => {
-    for (const { field, order = 'asc' } of categories) {
+    for (const { field, order = "asc" } of categories) {
       const aField = a[field];
       const bField = b[field];
-      if (aField < bField) return order === 'asc' ? -1 : 1;
-      if (aField > bField) return order === 'asc' ? 1 : -1;
+      if (aField < bField) return order === "asc" ? -1 : 1;
+      if (aField > bField) return order === "asc" ? 1 : -1;
     }
     return 0;
   });
@@ -468,26 +465,26 @@ interface FilterState {
 export const ProductManager: React.FC = () => {
   // Sample data
   const [products, setProducts] = useState<Product[]>([
-    { id: 1, name: 'Laptop', price: 999, stock: 15, category: 'Electronics' },
-    { id: 2, name: 'Mouse', price: 25, stock: 50, category: 'Electronics' },
-    { id: 3, name: 'Desk', price: 299, stock: 8, category: 'Furniture' },
-    { id: 4, name: 'Chair', price: 199, stock: 12, category: 'Furniture' },
-    { id: 5, name: 'Keyboard', price: 79, stock: 30, category: 'Electronics' },
-    { id: 6, name: 'Monitor', price: 349, stock: 20, category: 'Electronics' },
-    { id: 7, name: 'Lamp', price: 45, stock: 25, category: 'Furniture' },
-    { id: 8, name: 'Notebook', price: 5, stock: 100, category: 'Stationery' },
+    { id: 1, name: "Laptop", price: 999, stock: 15, category: "Electronics" },
+    { id: 2, name: "Mouse", price: 25, stock: 50, category: "Electronics" },
+    { id: 3, name: "Desk", price: 299, stock: 8, category: "Furniture" },
+    { id: 4, name: "Chair", price: 199, stock: 12, category: "Furniture" },
+    { id: 5, name: "Keyboard", price: 79, stock: 30, category: "Electronics" },
+    { id: 6, name: "Monitor", price: 349, stock: 20, category: "Electronics" },
+    { id: 7, name: "Lamp", price: 45, stock: 25, category: "Furniture" },
+    { id: 8, name: "Notebook", price: 5, stock: 100, category: "Stationery" },
   ]);
 
   const [showForm, setShowForm] = useState(false);
-  const [sortField, setSortField] = useState<keyof Product>('name');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortField, setSortField] = useState<keyof Product>("name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [filters, setFilters] = useState<FilterState>({
-    search: '',
-    category: '',
-    minPrice: '',
-    maxPrice: '',
-    minStock: '',
-    maxStock: '',
+    search: "",
+    category: "",
+    minPrice: "",
+    maxPrice: "",
+    minStock: "",
+    maxStock: "",
   });
 
   // TODO: Implement all handlers and logic
@@ -495,10 +492,10 @@ export const ProductManager: React.FC = () => {
     // Toggle sort order if clicking same field
     // Otherwise, default to ascending
     if (field === sortField) {
-      setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
     } else {
       setSortField(field);
-      setSortOrder('asc');
+      setSortOrder("asc");
     }
   };
 
@@ -554,17 +551,17 @@ export const ProductManager: React.FC = () => {
   const categories = Array.from(new Set(products.map((p) => p.category)));
 
   return (
-    <div className='product-manager'>
+    <div className="product-manager">
       <header>
         <h1>Product Manager</h1>
         <button onClick={() => setShowForm(true)}>+ Add Product</button>
       </header>
 
       {/* Search and Filters */}
-      <div className='filters'>
+      <div className="filters">
         <input
-          type='text'
-          placeholder='Search by name...'
+          type="text"
+          placeholder="Search by name..."
           value={filters.search}
           onChange={(e) =>
             setFilters((prev) => ({ ...prev, search: e.target.value }))
@@ -577,30 +574,27 @@ export const ProductManager: React.FC = () => {
             setFilters((prev) => ({ ...prev, category: e.target.value }))
           }
         >
-          <option value=''>All Categories</option>
+          <option value="">All Categories</option>
           {categories.map((cat) => (
-            <option
-              key={cat}
-              value={cat}
-            >
+            <option key={cat} value={cat}>
               {cat}
             </option>
           ))}
         </select>
 
-        <div className='range-filter'>
+        <div className="range-filter">
           <label>Price:</label>
           <input
-            type='number'
-            placeholder='Min'
+            type="number"
+            placeholder="Min"
             value={filters.minPrice}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, minPrice: e.target.value }))
             }
           />
           <input
-            type='number'
-            placeholder='Max'
+            type="number"
+            placeholder="Max"
             value={filters.maxPrice}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, maxPrice: e.target.value }))
@@ -608,19 +602,19 @@ export const ProductManager: React.FC = () => {
           />
         </div>
 
-        <div className='range-filter'>
+        <div className="range-filter">
           <label>Stock:</label>
           <input
-            type='number'
-            placeholder='Min'
+            type="number"
+            placeholder="Min"
             value={filters.minStock}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, minStock: e.target.value }))
             }
           />
           <input
-            type='number'
-            placeholder='Max'
+            type="number"
+            placeholder="Max"
             value={filters.maxStock}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, maxStock: e.target.value }))
@@ -630,7 +624,7 @@ export const ProductManager: React.FC = () => {
       </div>
 
       {/* Stats */}
-      <div className='stats'>
+      <div className="stats">
         <span>Products: {getFilteredAndSortedProducts().length}</span>
         <span>
           Price: ${stats.minPrice} - ${stats.maxPrice}
@@ -649,12 +643,9 @@ export const ProductManager: React.FC = () => {
 
       {/* Form Modal */}
       {showForm && (
-        <div className='modal-overlay'>
-          <div className='modal'>
-            <button
-              className='close-btn'
-              onClick={() => setShowForm(false)}
-            >
+        <div className="modal-overlay">
+          <div className="modal">
+            <button className="close-btn" onClick={() => setShowForm(false)}>
               ×
             </button>
             <ProductForm onSubmit={handleAddProduct} />
