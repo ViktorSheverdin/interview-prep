@@ -1,6 +1,7 @@
 import React from "react";
-import { ExpenseStatus } from "./types";
+
 import { IStatusFilterProps } from "./componentTypes";
+import { ExpenseStatus } from "./types";
 
 const statusColor: Record<ExpenseStatus, string> = {
   [ExpenseStatus.APPROVED]: "green",
@@ -12,7 +13,11 @@ const statusColor: Record<ExpenseStatus, string> = {
 
 export { statusColor };
 
-export const StatusFilter = ({ filters, setFilters, expenses }: IStatusFilterProps) => {
+export const StatusFilter = ({
+  filters,
+  setFilters,
+  expenses,
+}: IStatusFilterProps) => {
   const toggleStatus = (status: ExpenseStatus) => {
     const current = filters.statuses;
     const updated = current.includes(status)
