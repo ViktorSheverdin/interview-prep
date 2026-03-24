@@ -2,7 +2,7 @@ const API_BASE = "http://localhost:8000/api";
 
 export async function fetchJson<T>(
   endpoint: string,
-  options?: RequestInit
+  options?: RequestInit,
 ): Promise<T> {
   const res = await fetch(`${API_BASE}${endpoint}`, {
     headers: { "Content-Type": "application/json" },
