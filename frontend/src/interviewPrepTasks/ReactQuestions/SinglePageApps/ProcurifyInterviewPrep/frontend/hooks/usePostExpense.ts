@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
+
 import { Expense, ExpenseCreate } from "../types";
 
 export const usePostExpenses = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const postExpenses = useCallback(async (expenseData: ExpenseCreate[]) => {
+  const postExpenses = useCallback(async (expenseData: ExpenseCreate) => {
     try {
       setIsLoading(true);
       const res = await fetch("/api/expenses", {
