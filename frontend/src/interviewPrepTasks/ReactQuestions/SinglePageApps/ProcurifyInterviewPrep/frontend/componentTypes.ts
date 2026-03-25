@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Expense, ExpenseCreate, ExpenseStatus } from "./types";
+import { Expense, ExpenseStatus } from "./types";
 
 export interface IColumns<T> {
   key: keyof T;
@@ -36,4 +36,5 @@ export type FormFieldConfig<T> = {
   type: "text" | "number" | "select" | "textarea";
   rules: Rule<T>[];
   defaultValue: string | number;
+  options?: { value: string; label: string }[];
 };
