@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 
-import { IColumns, IListOfExpenses } from "./componentTypes";
+import { IColumns, IListOfExpenses } from "../componentTypes";
+import { CurrencyConversion, Expense, ExpenseStatus } from "../types";
+import { formatCurrency } from "../utils";
 import { statusColor } from "./StatusFilter";
-import { CurrencyConversion, Expense, ExpenseStatus } from "./types";
-import { formatCurrency } from "./utils";
 
 export const ListOfExpenses = (props: IListOfExpenses) => {
   const {

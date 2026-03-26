@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import { Expense } from "./types";
+import { Expense } from "../types";
 
 interface ISidePanelProps {
   expenseInfo: Expense | null;
