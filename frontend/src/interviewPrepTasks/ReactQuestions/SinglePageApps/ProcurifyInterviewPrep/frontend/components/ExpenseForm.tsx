@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { expenseFormSchema } from "./expenseFormSchema";
-import { getInitialState } from "./getInitialState";
-import { ExpenseCreate } from "./types";
-import { validateForm } from "./validators";
+import { expenseFormSchema } from "../expenseFormSchema";
+import { getInitialState } from "../getInitialState";
+import { ExpenseCreate } from "../types";
+import { validateForm } from "../validators";
 
 type IExpenseForm = {
   onSubmit: (formState: ExpenseCreate) => void;

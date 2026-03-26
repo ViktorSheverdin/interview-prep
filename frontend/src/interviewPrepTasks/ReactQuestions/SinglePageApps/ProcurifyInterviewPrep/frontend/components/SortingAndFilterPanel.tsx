@@ -1,6 +1,6 @@
-import { IFilters } from "./componentTypes";
+import { IFilters } from "../componentTypes";
+import { Expense } from "../types";
 import { StatusFilter } from "./StatusFilter";
-import { Expense } from "./types";
 
 export const SortingAndFilterPanel = ({
   filters,
