@@ -23,7 +23,7 @@ export interface IListOfExpenses {
 
 export interface IStatusFilterProps {
   filters: IFilters;
-  setFilters: (filters: IFilters) => void;
+  onFiltersChange: (filters: IFilters) => void;
   expenses: Expense[];
 }
 

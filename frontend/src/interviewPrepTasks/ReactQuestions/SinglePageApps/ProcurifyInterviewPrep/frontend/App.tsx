@@ -4,12 +4,13 @@ import { useDebounce } from "../../GeneralInterviewFunctions/GeneralInterviewFun
 import { ExpenseForm } from "./components/ExpenseForm";
 import { KpiDashboard } from "./components/KpiDashboard";
 import { ListOfExpenses } from "./components/ListOfExpenses";
+import { PageNavigation } from "./components/PageNavigation";
 import { SidePanel } from "./components/SidePanel";
 import { SortingAndFilterPanel } from "./components/SortingAndFilterPanel";
 import { IFilters } from "./componentTypes";
 import { useFetch } from "./hooks/useFetch";
 import { usePostExpenses } from "./hooks/usePostExpense";
-import { Expense, ExpenseCreate } from "./types";
+import { Expense, ExpenseCreate, PaginatedExpenses } from "./types";
 import { sortBy } from "./utils";
 
 const ProcurifyInterviewPrep: React.FC = () => {
@@ -18,25 +19,32 @@ const ProcurifyInterviewPrep: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [filters, setFilters] = useState<IFilters>({ statuses: [], query: "" });
   const debouncedValue = useDebounce(filters.query, 300);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   const expensesEndpoint = useMemo(() => {
     const params = new URLSearchParams();
+
     if (debouncedValue) params.set("search", debouncedValue);
+
+    params.set("page", String(page));
+    params.set("page_size", String(pageSize));
+
     const query = params.toString();
     return `expenses${query ? `?${query}` : ""}`;
-  }, [debouncedValue]);
+  }, [debouncedValue, page, pageSize]);
 
-  const { data: expenses, isLoading: isExpensesLoading } =
-    useFetch<Expense[]>(expensesEndpoint);
+  const { data: paginatedExpenses, isLoading: isExpensesLoading } =
+    useFetch<PaginatedExpenses>(expensesEndpoint);
   const [displayExpenses, setDisplayExpenses] = useState<Expense[]>([]);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
   const { postExpenses, expenses: newlyCreatedExpenses } = usePostExpenses();
 
   useEffect(() => {
-    if (expenses) {
-      setDisplayExpenses(expenses);
+    if (paginatedExpenses) {
+      setDisplayExpenses(paginatedExpenses.items);
     }
-  }, [expenses]);
+  }, [paginatedExpenses]);
 
   useEffect(() => {
     if (newlyCreatedExpenses.length > 0) {
@@ -66,6 +74,20 @@ const ProcurifyInterviewPrep: React.FC = () => {
     return sortBy(result, sortField, sortOrder);
   }, [displayExpenses, sortField, sortOrder, filters]);
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handlePageSizeChange = (newSize: number) => {
+    setPageSize(newSize);
+    setPage(1);
+  };
+
+  const handleFiltersChange = (newFilters: IFilters) => {
+    setFilters(newFilters);
+    setPage(1);
+  };
+
   const handleSubmit = (formState: ExpenseCreate) => {
     postExpenses(formState);
   };
@@ -77,8 +99,15 @@ const ProcurifyInterviewPrep: React.FC = () => {
       <ExpenseForm onSubmit={handleSubmit} />
       <SortingAndFilterPanel
         filters={filters}
-        setFilters={setFilters}
+        onFiltersChange={handleFiltersChange}
         expenses={sortedExpenses}
+      />
+      <PageNavigation
+        page={page}
+        onPageChange={handlePageChange}
+        totalPages={paginatedExpenses?.total_pages}
+        pageSize={pageSize}
+        onPageSizeChange={handlePageSizeChange}
       />
       {/* Expense Table */}
       {isExpensesLoading ? (

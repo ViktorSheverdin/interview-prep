@@ -13,7 +13,7 @@ export { statusColor };
 
 export const StatusFilter = ({
   filters,
-  setFilters,
+  onFiltersChange,
   expenses,
 }: IStatusFilterProps) => {
   const toggleStatus = (status: ExpenseStatus) => {
@@ -21,13 +21,13 @@ export const StatusFilter = ({
     const updated = current.includes(status)
       ? current.filter((s) => s !== status)
       : [...current, status];
-    setFilters({ ...filters, statuses: updated });
+    onFiltersChange({ ...filters, statuses: updated });
   };
 
   return (
     <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
       <button
-        onClick={() => setFilters({ ...filters, statuses: [] })}
+        onClick={() => onFiltersChange({ ...filters, statuses: [] })}
         style={{
           padding: "4px 12px",
           borderRadius: "16px",
