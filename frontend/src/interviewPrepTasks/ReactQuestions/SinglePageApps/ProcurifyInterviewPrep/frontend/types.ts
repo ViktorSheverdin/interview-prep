@@ -146,6 +146,14 @@ export interface PurchaseOrder {
   notes: string;
 }
 
+export interface PaginatedExpenses {
+  items: Expense[];
+  total_count: number;
+  page: number;
+  page_size: number;
+  total_pages: number;
+}
+
 export interface DashboardKPIs {
   pending_approvals: number;
   pending_total: number;

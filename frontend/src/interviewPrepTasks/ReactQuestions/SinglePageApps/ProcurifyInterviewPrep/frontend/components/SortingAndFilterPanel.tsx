@@ -4,11 +4,11 @@ import { StatusFilter } from "./StatusFilter";
 
 export const SortingAndFilterPanel = ({
   filters,
-  setFilters,
+  onFiltersChange,
   expenses,
 }: {
   filters: IFilters;
-  setFilters: (filters: IFilters) => void;
+  onFiltersChange: (filters: IFilters) => void;
   expenses: Expense[];
 }) => {
   return (
@@ -18,13 +18,13 @@ export const SortingAndFilterPanel = ({
         <input
           value={filters.query}
           onChange={(e) => {
-            setFilters({ ...filters, query: e.target.value });
+            onFiltersChange({ ...filters, query: e.target.value });
           }}
         />
       </div>
       <StatusFilter
         filters={filters}
-        setFilters={setFilters}
+        onFiltersChange={onFiltersChange}
         expenses={expenses}
       />
     </div>

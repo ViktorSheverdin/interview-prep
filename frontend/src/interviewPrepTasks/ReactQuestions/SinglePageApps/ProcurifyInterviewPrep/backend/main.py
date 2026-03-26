@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Generic, Optional, TypeVar
+from math import ceil
 from datetime import datetime, timedelta
 from enum import Enum
 import random
@@ -94,6 +95,14 @@ class ExpenseCreate(BaseModel):
     receipt_url: Optional[str] = None
     tags: list[str] = []
     is_recurring: bool = False
+
+
+class PaginatedExpenses(BaseModel):
+    items: list[Expense]
+    total_count: int
+    page: int
+    page_size: int
+    total_pages: int
 
 
 class ApprovalRequest(BaseModel):
@@ -291,7 +300,7 @@ def root():
 
 # ── Expenses ──
 
-@app.get("/api/expenses", response_model=list[Expense])
+@app.get("/api/expenses", response_model=PaginatedExpenses)
 def get_expenses(
     status: Optional[ExpenseStatus] = None,
     category: Optional[ExpenseCategory] = None,
@@ -329,8 +338,17 @@ def get_expenses(
     else:
         filtered.sort(key=lambda e: e.created_at, reverse=True)
 
+    total_count = len(filtered)
     start = (page - 1) * page_size
-    return filtered[start:start + page_size]
+    items = filtered[start:start + page_size]
+
+    return PaginatedExpenses(
+        items=items,
+        total_count=total_count,
+        page=page,
+        page_size=page_size,
+        total_pages=ceil(total_count / page_size) if total_count > 0 else 1,
+    )
 
 
 @app.get("/api/expenses/{expense_id}", response_model=Expense)

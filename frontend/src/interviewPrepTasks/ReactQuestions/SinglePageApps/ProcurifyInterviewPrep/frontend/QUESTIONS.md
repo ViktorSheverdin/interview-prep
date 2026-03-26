@@ -17,14 +17,17 @@ your reasoning as you code — that's what the interviewer evaluates.
 ## Phase 1: Foundation (Questions 1–5)
 
 ### Q1 — KPI Dashboard Cards
+
 **Difficulty: ⭐**
 Fetch data from `GET /api/dashboard/kpis` and render a row of KPI cards showing:
+
 - Pending Approvals (count + total $)
 - Monthly Spend
 - Over-Budget Departments
 - High-Risk Vendors
 
 Requirements:
+
 - Use `useEffect` + `useState` for data fetching
 - Handle loading and error states
 - Format currency values with `Intl.NumberFormat`
@@ -33,10 +36,12 @@ Requirements:
 ---
 
 ### Q2 — Expense List Table
+
 **Difficulty: ⭐⭐**
 Fetch expenses from `GET /api/expenses` and display them in a sortable table.
 
 Requirements:
+
 - Columns: Title, Amount, Currency, Category, Status, Department, Vendor, Date
 - Color-code the Status column (green=approved, yellow=pending, red=rejected, gray=draft, blue=paid)
 - Clicking a column header should sort by that column (toggle asc/desc)
@@ -46,10 +51,12 @@ Requirements:
 ---
 
 ### Q3 — Status Filter Bar
+
 **Difficulty: ⭐⭐**
 Add a horizontal filter bar above the expense table with toggleable status chips.
 
 Requirements:
+
 - Show all `ExpenseStatus` values as filter chips
 - Multiple statuses can be active simultaneously
 - Show count badge on each chip (e.g., "Pending (7)")
@@ -60,11 +67,13 @@ Requirements:
 ---
 
 ### Q4 — Currency Display with Conversion Tooltip
+
 **Difficulty: ⭐⭐**
 When a user hovers over an amount that is NOT in USD, show a tooltip with the
 USD-equivalent using `GET /api/currency/convert`.
 
 Requirements:
+
 - Only fetch conversion on hover (not for every row)
 - Cache conversions so the same amount+currency pair doesn't re-fetch
 - Show a tiny spinner in the tooltip while loading
@@ -74,10 +83,12 @@ Requirements:
 ---
 
 ### Q5 — Expense Detail Side Panel
+
 **Difficulty: ⭐⭐⭐**
 Clicking a row in the expense table opens a slide-in side panel showing full details.
 
 Requirements:
+
 - Fetch full expense data from `GET /api/expenses/{id}`
 - Animate the panel sliding in from the right (CSS transitions)
 - Show all expense fields in a structured layout
@@ -91,10 +102,12 @@ Requirements:
 ## Phase 2: Interactivity (Questions 6–10)
 
 ### Q6 — Create Expense Form
+
 **Difficulty: ⭐⭐⭐**
 Build a form to create a new expense via `POST /api/expenses`.
 
 Requirements:
+
 - Fields: title, amount, currency (dropdown), category (dropdown), department (dropdown),
   vendor (dropdown fetched from `/api/vendors`), description (textarea), tags (multi-input)
 - Client-side validation:
@@ -110,11 +123,13 @@ Requirements:
 ---
 
 ### Q7 — Approval Workflow Actions
+
 **Difficulty: ⭐⭐⭐**
 In the expense detail panel (Q5), add Approve/Reject buttons for expenses with
 status "pending". Uses `POST /api/expenses/{id}/approve`.
 
 Requirements:
+
 - Only show action buttons when status is "pending"
 - "Approve" button: sends `{ action: "approve" }`
 - "Reject" button: opens a small modal requiring a rejection reason (min 10 chars)
@@ -126,10 +141,12 @@ Requirements:
 ---
 
 ### Q8 — Real-Time Search with Debounce
+
 **Difficulty: ⭐⭐⭐**
 Add a search input above the table that filters expenses via the API's `search` param.
 
 Requirements:
+
 - Debounce input by 300ms (implement your own, no libraries)
 - Show a "searching..." indicator
 - Clear button to reset search
@@ -142,10 +159,12 @@ Requirements:
 ---
 
 ### Q9 — Pagination
+
 **Difficulty: ⭐⭐⭐**
 The expense list should paginate using the API's `page` and `page_size` params.
 
 Requirements:
+
 - Show page controls: Previous, page numbers, Next
 - Show "Showing X–Y of Z results" text
 - Page size selector (10, 25, 50)
@@ -157,10 +176,12 @@ Requirements:
 ---
 
 ### Q10 — Vendor Risk Indicator Component
+
 **Difficulty: ⭐⭐**
 Create a reusable `<VendorRiskBadge>` component and integrate it into the expense table.
 
 Requirements:
+
 - Props: `riskLevel: VendorRisk`, `size?: "sm" | "md" | "lg"`
 - Color scheme: low=green, medium=yellow, high=orange, critical=red with pulsing animation
 - Fetch vendor data from `/api/vendors` and join with expense data by `vendor_id`
@@ -173,10 +194,12 @@ Requirements:
 ## Phase 3: Advanced Patterns (Questions 11–15)
 
 ### Q11 — Budget Utilization Bar Chart
+
 **Difficulty: ⭐⭐⭐⭐**
 Build a budget visualization component WITHOUT any charting library — pure CSS/SVG.
 
 Requirements:
+
 - Fetch from `GET /api/budgets`
 - Horizontal bar chart showing allocated vs. spent for each department
 - Bars that exceed 100% should visually overflow with a red danger zone
@@ -189,10 +212,12 @@ Requirements:
 ---
 
 ### Q12 — Custom `useExpenses` Hook with Caching
+
 **Difficulty: ⭐⭐⭐⭐**
 Refactor all expense data fetching into a custom hook.
 
 Requirements:
+
 - `useExpenses(filters)` hook that returns `{ data, loading, error, refetch, totalCount }`
 - Implement a simple in-memory cache (keyed by serialized filter params)
 - Stale-while-revalidate pattern: return cached data immediately, fetch fresh in background
@@ -204,11 +229,13 @@ Requirements:
 ---
 
 ### Q13 — Drag-and-Drop Expense Prioritization
+
 **Difficulty: ⭐⭐⭐⭐**
 Build a Kanban-style board where pending expenses can be drag-and-dropped to change
 their priority order. NO external drag libraries.
 
 Requirements:
+
 - Implement using native HTML5 Drag and Drop API
 - Three columns: "Low Priority", "Medium Priority", "High Priority"
 - Drag expenses between columns
@@ -222,10 +249,12 @@ Requirements:
 ---
 
 ### Q14 — Spend Analytics Dashboard with Drill-Down
+
 **Difficulty: ⭐⭐⭐⭐⭐**
 Build an analytics page using `GET /api/analytics/spend-summary`.
 
 Requirements:
+
 - Donut chart (SVG) showing spend by category
   - Clickable segments that drill down to show expenses in that category
   - Animated segment transitions
@@ -242,11 +271,13 @@ Requirements:
 ---
 
 ### Q15 — Audit Log with Virtual Scrolling
+
 **Difficulty: ⭐⭐⭐⭐⭐**
 Build an audit log viewer using `GET /api/audit-log` with virtual scrolling for
 performance. NO external virtualization libraries.
 
 Requirements:
+
 - Implement windowed rendering: only render visible rows + buffer
 - Calculate scroll position to determine which items to show
 - Fixed row height for simpler calculations
@@ -262,10 +293,12 @@ Requirements:
 ## Phase 4: Architecture & Edge Cases (Questions 16–20)
 
 ### Q16 — Error Boundary with Retry & Fallback UI
+
 **Difficulty: ⭐⭐⭐⭐**
 Implement a comprehensive error handling strategy.
 
 Requirements:
+
 - Create a React Error Boundary class component
   - Catches render errors in child components
   - Shows a styled fallback UI with error details (in development only)
@@ -281,10 +314,12 @@ Requirements:
 ---
 
 ### Q17 — Accessibility Audit & ARIA Implementation
+
 **Difficulty: ⭐⭐⭐⭐**
 Make the entire application WCAG 2.1 AA compliant.
 
 Requirements:
+
 - All interactive elements must be keyboard navigable (tab order, focus management)
 - The expense table must have proper ARIA table roles and `aria-sort` on sorted columns
 - The side panel (Q5) must trap focus when open
@@ -302,10 +337,12 @@ Requirements:
 ---
 
 ### Q18 — Performance Optimization
+
 **Difficulty: ⭐⭐⭐⭐⭐**
 Optimize the application for performance.
 
 Requirements:
+
 - Identify and fix unnecessary re-renders using React DevTools Profiler
   (describe what you'd look for)
 - Implement `React.memo` on the expense table rows with a custom comparator
@@ -321,11 +358,13 @@ Requirements:
 ---
 
 ### Q19 — State Management Architecture
+
 **Difficulty: ⭐⭐⭐⭐⭐**
 Refactor the app to use React Context + useReducer for global state (NO external
 state libraries).
 
 Requirements:
+
 - Design a state shape that covers: expenses, filters, pagination, selected expense,
   UI state (panel open, form open, toasts)
 - Create a typed reducer with discriminated union action types
@@ -342,10 +381,12 @@ Requirements:
 ---
 
 ### Q20 — Integration Testing & Edge Cases
+
 **Difficulty: ⭐⭐⭐⭐⭐**
 Write comprehensive tests for the application.
 
 Requirements:
+
 - Write tests for the `useExpenses` hook (Q12):
   - Test cache hit/miss scenarios
   - Test stale-while-revalidate behavior
