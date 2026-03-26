@@ -1,5 +1,3 @@
-import React from "react";
-
 import { IStatusFilterProps } from "./componentTypes";
 import { ExpenseStatus } from "./types";
 

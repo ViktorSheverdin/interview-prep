@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 
+import { useDebounce } from "../../GeneralInterviewFunctions/GeneralInterviewFunctions";
 import { IFilters } from "./componentTypes";
 import { ExpenseForm } from "./ExpenseForm";
 import { useFetch } from "./hooks/useFetch";
@@ -7,12 +8,26 @@ import { usePostExpenses } from "./hooks/usePostExpense";
 import { KpiDashboard } from "./KpiDashboard";
 import { ListOfExpenses } from "./ListOfExpenses";
 import { SidePanel } from "./SidePanel";
+import { SortingAndFilterPanel } from "./SortingAndFilterPanel";
 import { Expense, ExpenseCreate } from "./types";
 import { sortBy } from "./utils";
 
 const ProcurifyInterviewPrep: React.FC = () => {
+  // Sorting & filtering
+  const [sortField, setSortField] = useState<keyof Expense>("title");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [filters, setFilters] = useState<IFilters>({ statuses: [], query: "" });
+  const debouncedValue = useDebounce(filters.query, 300);
+
+  const expensesEndpoint = useMemo(() => {
+    const params = new URLSearchParams();
+    if (debouncedValue) params.set("search", debouncedValue);
+    const query = params.toString();
+    return `expenses${query ? `?${query}` : ""}`;
+  }, [debouncedValue]);
+
   const { data: expenses, isLoading: isExpensesLoading } =
-    useFetch<Expense[]>("expenses");
+    useFetch<Expense[]>(expensesEndpoint);
   const [displayExpenses, setDisplayExpenses] = useState<Expense[]>([]);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
   const { postExpenses, expenses: newlyCreatedExpenses } = usePostExpenses();
@@ -32,11 +47,6 @@ const ProcurifyInterviewPrep: React.FC = () => {
   const { data: expenseInfo } = useFetch<Expense>(
     selectedExpense?.id ? `expenses/${selectedExpense.id}` : null,
   );
-
-  // Sorting & filtering
-  const [sortField, setSortField] = useState<keyof Expense>("title");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [filters, setFilters] = useState<IFilters>({ statuses: [] });
 
   const handleTableSort = (field: keyof Expense) => {
     if (field === sortField) {
@@ -65,6 +75,11 @@ const ProcurifyInterviewPrep: React.FC = () => {
 
       <KpiDashboard />
       <ExpenseForm onSubmit={handleSubmit} />
+      <SortingAndFilterPanel
+        filters={filters}
+        setFilters={setFilters}
+        expenses={sortedExpenses}
+      />
       {/* Expense Table */}
       {isExpensesLoading ? (
         "Loading..."
@@ -74,8 +89,6 @@ const ProcurifyInterviewPrep: React.FC = () => {
           handleTableSort={handleTableSort}
           sortOrder={sortOrder}
           sortField={sortField}
-          filters={filters}
-          setFilters={setFilters}
           setSelectedExpense={setSelectedExpense}
         />
       ) : null}

@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { IColumns, IListOfExpenses } from "./componentTypes";
-import { statusColor, StatusFilter } from "./StatusFilter";
+import { statusColor } from "./StatusFilter";
 import { CurrencyConversion, Expense, ExpenseStatus } from "./types";
 import { formatCurrency } from "./utils";
 
@@ -11,8 +11,6 @@ export const ListOfExpenses = (props: IListOfExpenses) => {
     sortOrder,
     sortField,
     handleTableSort,
-    filters,
-    setFilters,
     setSelectedExpense,
   } = props;
 
@@ -92,11 +90,6 @@ export const ListOfExpenses = (props: IListOfExpenses) => {
 
   return (
     <div>
-      <StatusFilter
-        filters={filters}
-        setFilters={setFilters}
-        expenses={expenses}
-      />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <table>
           <thead>
