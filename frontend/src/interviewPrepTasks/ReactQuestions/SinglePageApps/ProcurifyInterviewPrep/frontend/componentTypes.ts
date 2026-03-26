@@ -10,6 +10,7 @@ export interface IColumns<T> {
 
 export interface IFilters {
   statuses: ExpenseStatus[];
+  query: string;
 }
 
 export interface IListOfExpenses {
@@ -17,8 +18,6 @@ export interface IListOfExpenses {
   sortField: keyof Expense;
   sortOrder: "asc" | "desc";
   handleTableSort: (column: keyof Expense) => void;
-  filters: IFilters;
-  setFilters: (filter: IFilters) => void;
   setSelectedExpense: (expense: Expense) => void;
 }
 
