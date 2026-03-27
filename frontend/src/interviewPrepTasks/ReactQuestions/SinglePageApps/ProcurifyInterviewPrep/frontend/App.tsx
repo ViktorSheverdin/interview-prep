@@ -43,6 +43,7 @@ const ProcurifyInterviewPrep: React.FC = () => {
     pageSize,
     search: filters.query,
   });
+  console.log("Example of DedupedExpenses data:", dedupedExpenses?.total_count);
 
   const [displayExpenses, setDisplayExpenses] = useState<Expense[]>([]);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
