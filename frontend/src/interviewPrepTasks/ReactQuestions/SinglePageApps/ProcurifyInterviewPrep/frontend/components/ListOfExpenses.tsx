@@ -1,9 +1,17 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { IColumns, IListOfExpenses } from "../componentTypes";
-import { CurrencyConversion, Expense, ExpenseStatus } from "../types";
+import { useFetch } from "../hooks/useFetch";
+import {
+  CurrencyConversion,
+  Expense,
+  ExpenseStatus,
+  Vendor,
+  VendorRisk,
+} from "../types";
 import { formatCurrency } from "../utils";
 import { statusColor } from "./StatusFilter";
+import { VendorRiskBadge } from "./VendorRiskBadge";
 
 export const ListOfExpenses = (props: IListOfExpenses) => {
   const {
@@ -13,6 +21,12 @@ export const ListOfExpenses = (props: IListOfExpenses) => {
     handleTableSort,
     setSelectedExpense,
   } = props;
+
+  const { data: vendors } = useFetch<Vendor[]>("vendors");
+  const vendorsMap = useMemo<Map<string, Vendor>>(() => {
+    if (!vendors) return new Map();
+    return new Map(vendors.map((v) => [v.id, v]));
+  }, [vendors]);
 
   const [tooltip, setTooltip] = useState<{
     id: string;
@@ -85,6 +99,19 @@ export const ListOfExpenses = (props: IListOfExpenses) => {
           {String(val)}
         </div>
       ),
+    },
+    {
+      key: "vendor_id",
+      label: "Vendor Risk",
+      render: (val) => {
+        const vendor = vendorsMap.get(val as string);
+        return (
+          <VendorRiskBadge
+            name={vendor?.name ?? ""}
+            riskLevel={vendor?.risk_level ?? VendorRisk.LOW}
+          />
+        );
+      },
     },
   ];
 
