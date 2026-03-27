@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VendorRisk } from "../types";
+import { VendorRisk } from "../types/types";
 
 interface IVendorRiskBadge {
   riskLevel: VendorRisk;

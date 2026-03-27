@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { PaginatedExpenses } from "../types";
+import { PaginatedExpenses } from "../types/types";
 
 interface ExpenseFilters {
   page: number;

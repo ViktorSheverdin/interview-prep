@@ -1,4 +1,4 @@
-import { FormFieldConfig } from "./componentTypes";
+import { FormFieldConfig } from "../types/componentTypes";
 
 export const getInitialState = <T>(fields: FormFieldConfig<T>[]): T => {
   const state = {} as Record<string, string | number>;

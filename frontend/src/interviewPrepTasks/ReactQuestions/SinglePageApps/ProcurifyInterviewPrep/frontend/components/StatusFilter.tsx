@@ -1,5 +1,5 @@
-import { IStatusFilterProps } from "../componentTypes";
-import { ExpenseStatus } from "../types";
+import { IStatusFilterProps } from "../types/componentTypes";
+import { ExpenseStatus } from "../types/types";
 
 const statusColor: Record<ExpenseStatus, string> = {
   [ExpenseStatus.APPROVED]: "green",

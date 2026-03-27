@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { Expense, ExpenseCreate } from "../types";
+import { Expense, ExpenseCreate } from "../types/types";
 
 export const usePostExpenses = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
