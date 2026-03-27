@@ -1,8 +1,6 @@
-import React from "react";
-
 import { useFetch } from "../hooks/useFetch";
-import { DashboardKPIs } from "../types";
-import { formatCurrency } from "../utils";
+import { DashboardKPIs } from "../types/types";
+import { formatCurrency } from "../utils/utils";
 
 export const KpiDashboard = () => {
   const {

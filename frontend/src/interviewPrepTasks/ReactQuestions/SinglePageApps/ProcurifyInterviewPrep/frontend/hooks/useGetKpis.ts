@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchJson } from "../api";
-import { DashboardKPIs } from "../types";
+
+import { DashboardKPIs } from "../types/types";
+import { fetchJson } from "../utils/api";
 
 // /api/dashboard/kpis
 export const useGetKpis = () => {

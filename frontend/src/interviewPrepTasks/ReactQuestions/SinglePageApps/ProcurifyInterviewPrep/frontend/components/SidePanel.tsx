@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-import { Expense } from "../types";
+import { Expense } from "../types/types";
 
 interface ISidePanelProps {
   expenseInfo: Expense | null;

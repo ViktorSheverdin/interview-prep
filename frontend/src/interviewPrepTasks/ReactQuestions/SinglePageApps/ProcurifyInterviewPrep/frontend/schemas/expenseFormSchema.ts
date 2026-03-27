@@ -1,6 +1,6 @@
-import { FormFieldConfig } from "./componentTypes";
-import { ExpenseCategory, ExpenseCreate } from "./types";
-import { minLength, required } from "./validators";
+import { FormFieldConfig } from "../types/componentTypes";
+import { ExpenseCategory, ExpenseCreate } from "../types/types";
+import { minLength, required } from "../utils/validators";
 
 export const expenseFormSchema: FormFieldConfig<ExpenseCreate>[] = [
   {

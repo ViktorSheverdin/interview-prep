@@ -7,12 +7,12 @@ import { ListOfExpenses } from "./components/ListOfExpenses";
 import { PageNavigation } from "./components/PageNavigation";
 import { SidePanel } from "./components/SidePanel";
 import { SortingAndFilterPanel } from "./components/SortingAndFilterPanel";
-import { IFilters } from "./componentTypes";
 import { useExpenses } from "./hooks/useExpenses";
 import { useFetch } from "./hooks/useFetch";
 import { usePostExpenses } from "./hooks/usePostExpense";
-import { Expense, ExpenseCreate, PaginatedExpenses } from "./types";
-import { sortBy } from "./utils";
+import { IFilters } from "./types/componentTypes";
+import { Expense, ExpenseCreate, PaginatedExpenses } from "./types/types";
+import { sortBy } from "./utils/utils";
 
 const ProcurifyInterviewPrep: React.FC = () => {
   // Sorting & filtering
@@ -43,7 +43,6 @@ const ProcurifyInterviewPrep: React.FC = () => {
     pageSize,
     search: filters.query,
   });
-  console.log("Example of DedupedExpenses data:", dedupedExpenses?.total_count);
 
   const [displayExpenses, setDisplayExpenses] = useState<Expense[]>([]);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
@@ -106,6 +105,9 @@ const ProcurifyInterviewPrep: React.FC = () => {
 
       <KpiDashboard />
       <ExpenseForm onSubmit={handleSubmit} />
+      <div>
+        Total Count from deduped and cached API: {dedupedExpenses?.total_count}
+      </div>
       <SortingAndFilterPanel
         filters={filters}
         onFiltersChange={handleFiltersChange}

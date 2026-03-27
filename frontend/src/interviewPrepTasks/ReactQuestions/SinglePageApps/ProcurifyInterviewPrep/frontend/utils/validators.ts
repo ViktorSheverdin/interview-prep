@@ -1,4 +1,4 @@
-import { FormFieldConfig, Rule } from "./componentTypes";
+import { FormFieldConfig, Rule } from "../types/componentTypes";
 
 export const required = <T>(msg = "Required"): Rule<T> => {
   return (val: T[keyof T]): string | null => {

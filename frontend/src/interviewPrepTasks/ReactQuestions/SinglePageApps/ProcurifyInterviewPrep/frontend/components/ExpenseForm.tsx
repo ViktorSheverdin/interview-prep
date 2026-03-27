@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { expenseFormSchema } from "../expenseFormSchema";
-import { getInitialState } from "../getInitialState";
-import { ExpenseCreate } from "../types";
-import { validateForm } from "../validators";
+import { expenseFormSchema } from "../schemas/expenseFormSchema";
+import { ExpenseCreate } from "../types/types";
+import { getInitialState } from "../utils/getInitialState";
+import { validateForm } from "../utils/validators";
 
 type IExpenseForm = {
   onSubmit: (formState: ExpenseCreate) => void;
@@ -45,6 +45,7 @@ export const ExpenseForm = (props: IExpenseForm) => {
                   return <option key={option.label}>{option.label}</option>;
                 })}
               </select>
+              {formErrors[field] ? <span>{formErrors[field]}</span> : null}
             </div>
           );
         }

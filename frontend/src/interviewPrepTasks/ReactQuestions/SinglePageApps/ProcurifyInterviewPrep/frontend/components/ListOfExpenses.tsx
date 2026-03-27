@@ -1,15 +1,15 @@
 import { useMemo, useRef, useState } from "react";
 
-import { IColumns, IListOfExpenses } from "../componentTypes";
 import { useFetch } from "../hooks/useFetch";
+import { IColumns, IListOfExpenses } from "../types/componentTypes";
 import {
   CurrencyConversion,
   Expense,
   ExpenseStatus,
   Vendor,
   VendorRisk,
-} from "../types";
-import { formatCurrency } from "../utils";
+} from "../types/types";
+import { formatCurrency } from "../utils/utils";
 import { statusColor } from "./StatusFilter";
 import { VendorRiskBadge } from "./VendorRiskBadge";
 
