@@ -8,6 +8,7 @@ import { PageNavigation } from "./components/PageNavigation";
 import { SidePanel } from "./components/SidePanel";
 import { SortingAndFilterPanel } from "./components/SortingAndFilterPanel";
 import { IFilters } from "./componentTypes";
+import { useExpenses } from "./hooks/useExpenses";
 import { useFetch } from "./hooks/useFetch";
 import { usePostExpenses } from "./hooks/usePostExpense";
 import { Expense, ExpenseCreate, PaginatedExpenses } from "./types";
@@ -36,6 +37,13 @@ const ProcurifyInterviewPrep: React.FC = () => {
 
   const { data: paginatedExpenses, isLoading: isExpensesLoading } =
     useFetch<PaginatedExpenses>(expensesEndpoint);
+
+  const { data: dedupedExpenses } = useExpenses({
+    page,
+    pageSize,
+    search: filters.query,
+  });
+
   const [displayExpenses, setDisplayExpenses] = useState<Expense[]>([]);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
   const { postExpenses, expenses: newlyCreatedExpenses } = usePostExpenses();
