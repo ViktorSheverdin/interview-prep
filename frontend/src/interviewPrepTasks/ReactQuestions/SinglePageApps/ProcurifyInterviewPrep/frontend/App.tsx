@@ -41,7 +41,7 @@ const ProcurifyInterviewPrep: React.FC = () => {
   const { data: dedupedExpenses } = useExpenses({
     page,
     pageSize,
-    search: filters.query,
+    search: debouncedValue,
   });
 
   const [displayExpenses, setDisplayExpenses] = useState<Expense[]>([]);
