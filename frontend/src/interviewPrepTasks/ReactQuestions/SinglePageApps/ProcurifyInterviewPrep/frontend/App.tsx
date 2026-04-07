@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { toast } from "../../../../FrontendPatterns/CustomPromises/Singlton/ToastNotification/toast";
 
 import { useDebounce } from "../../GeneralInterviewFunctions/GeneralInterviewFunctions";
 import { ExpenseForm } from "./components/ExpenseForm";
@@ -99,9 +100,15 @@ const ProcurifyInterviewPrep: React.FC = () => {
   const handleSubmit = (formState: ExpenseCreate) => {
     postExpenses(formState);
   };
+
+  const handleDisplayToast = () => {
+    toast.show("This is a toast", "success");
+  };
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
       <h1>Procurify Spend Management</h1>
+
+      <button onClick={handleDisplayToast}>Display Toast Message</button>
 
       <KpiDashboard />
       <ExpenseForm onSubmit={handleSubmit} />
